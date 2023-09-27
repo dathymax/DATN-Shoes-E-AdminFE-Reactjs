@@ -1,0 +1,7 @@
+.ant-menu .ant-menu-item .ant-menu-item-icon + span {
+	margin-inline-start: 7px;
+}
+
+.ant-menu-submenu-title {
+	padding-left: 10px !important;
+}
