@@ -1,16 +1,14 @@
-import Axios_instance from "../../config/axios";
-import { IUser } from "../../types";
-import Cookies from "js-cookie";
+import axios from "axios";
 
-const url = "/auth";
+const Axios_instance = axios.create({
+    baseURL: "http://localhost:8000/api/v1",
+    headers: {
+        'content-Type': 'application/json',
+    },
+});
 
-export async function login(values: IUser) {
-    const response = await Axios_instance.post(url, values);
+Axios_instance.interceptors.request.use(config => {
+    return config;
+})
 
-    return response?.data || {}
-}
-
-export const logout = () => {
-    localStorage.clear();
-    Cookies.remove("USER-AUTH");
-}
+export default Axios_instance;
