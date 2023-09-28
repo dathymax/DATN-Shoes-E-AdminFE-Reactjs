@@ -4,13 +4,14 @@ import Logo from "../../assets/images/Logo.png"
 import { BiHomeAlt2 } from "react-icons/bi"
 import { BsBoxSeam } from "react-icons/bs"
 import { PiReceiptLight, PiUsers } from "react-icons/pi"
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 
 const { Sider } = Layout;
 
 const AdminSidebar = () => {
     const navigate = useNavigate();
+    const { pathname } = useLocation();
 
     const menuItems = [
         {
@@ -89,12 +90,14 @@ const AdminSidebar = () => {
             width={240}
         >
             <img src={Logo} alt="Logo" />
+            <div className='h-[25px]'></div>
             <Menu
                 items={menuItems}
                 theme='light'
                 mode='inline'
                 style={{ border: "none" }}
                 onClick={onClick}
+                defaultSelectedKeys={[pathname]}
             />
         </Sider>
     )

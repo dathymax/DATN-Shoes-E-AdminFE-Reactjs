@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Banner from "../../assets/images/BannerLogin.png"
 import Logo from "../../assets/images/Logo.png"
 import { Button, Checkbox, Form, Input, Spin } from 'antd'
@@ -23,7 +23,7 @@ const AuthPage = () => {
             });
             setLoading(false);
             openNotiSuccess("Login", `Hello ${values.email}`);
-            navigate("/");
+            navigate("/dashboard");
         }).catch(() => {
             setLoading(false);
             openNotiError("Login");
