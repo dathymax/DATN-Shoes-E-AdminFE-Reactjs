@@ -1,9 +1,11 @@
 export interface IUser {
+    id?: string;
     firstname?: string;
     lastname?: string;
     email?: string;
     username?: string;
     password?: string;
+    role?: string;
 }
 
 export interface IProduct {
@@ -14,4 +16,10 @@ export interface IProduct {
     isNew?: boolean;
     isLiked?: boolean;
     isSoldOut?: boolean;
+}
+
+export interface IPasswordReset {
+    password?: string;
+    newPassword?: string;
+    confirmPassword?: string;
 }

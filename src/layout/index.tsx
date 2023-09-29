@@ -1,16 +1,23 @@
-import { Layout } from 'antd'
-import React from 'react'
-import AdminContent from './content'
-import AdminHeader from './header'
-import AdminSidebar from './sidebar'
-import { getUserEmail } from '../helpers'
-import { Navigate } from 'react-router-dom'
+import { Layout } from "antd";
+import React, { useEffect, useState } from "react";
+import AdminContent from "./content";
+import AdminHeader from "./header";
+import AdminSidebar from "./sidebar";
+import { Navigate } from "react-router-dom";
+import { getAccessToken } from "../helpers";
 
 const AdminLayout = () => {
-    const userEmail = getUserEmail();
+    const accessToken = getAccessToken();
+    const [permission, setPermission] = useState("");
 
-    if (!userEmail) {
-        return <Navigate to={"/auth"} />
+    useEffect(() => {
+        if (!accessToken) {
+            setPermission(accessToken);
+        }
+    }, [accessToken]);
+
+    if (!permission) {
+        <Navigate to={"/auth"} />;
     }
 
     return (
@@ -21,7 +28,7 @@ const AdminLayout = () => {
                 <AdminContent />
             </Layout>
         </Layout>
-    )
-}
+    );
+};
 
-export default AdminLayout
+export default AdminLayout;
