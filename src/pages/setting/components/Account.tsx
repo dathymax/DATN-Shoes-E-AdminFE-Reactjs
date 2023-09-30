@@ -1,6 +1,7 @@
 import { Button, Divider, Modal } from "antd";
 import React, { useState } from "react";
 import UpdatePassword from "./UpdatePassword";
+import Title from "../../../components/title";
 
 const SettingPageAccount = () => {
     const [open, setOpen] = useState(false);
@@ -16,10 +17,7 @@ const SettingPageAccount = () => {
     return (
         <>
             <div className="bg-white p-5 rounded-lg shadow-sm">
-                <div className="flex items-center gap-3">
-                    <div className="rounded-lg h-[25px] w-[6px] bg-black"></div>
-                    <h2>Manage account</h2>
-                </div>
+                <Title title="Manage account" />
                 <Divider />
                 <div className="grid grid-cols-3 gap-3">
                     <div className="col-span-1 uppercase text-gray-400 font-medium">
@@ -61,7 +59,7 @@ const SettingPageAccount = () => {
                 open={open}
                 onCancel={handleClose}
                 destroyOnClose
-                title={"Edit password"}
+                title={<Title title="Edit password" className="mb-4" />}
                 footer={null}
             >
                 <UpdatePassword handleClose={handleClose} />

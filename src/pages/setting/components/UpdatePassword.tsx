@@ -18,7 +18,10 @@ const UpdatePassword: FC<UpdatePasswordProps> = ({ handleClose }) => {
 
         updatePassword(id, values)
             .then(() => {
-                openNotiSuccess("Update password");
+                openNotiSuccess(
+                    "Update password",
+                    "Password update was successful. It is possible to update the password again after 7 days."
+                );
                 if (handleClose) {
                     handleClose();
                 }
@@ -33,17 +36,17 @@ const UpdatePassword: FC<UpdatePasswordProps> = ({ handleClose }) => {
         <Form layout="vertical" onFinish={onFinish}>
             <Form.Item
                 name="password"
-                label="Old password"
+                label="Current password"
                 rules={[
                     {
                         required: true,
-                        message: "Please type your old password",
+                        message: "Please type your current password",
                     },
                 ]}
             >
                 <Input.Password
                     size="large"
-                    placeholder="Type your old password"
+                    placeholder="Type your current password"
                 />
             </Form.Item>
             <Form.Item

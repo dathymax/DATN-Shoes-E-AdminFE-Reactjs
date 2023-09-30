@@ -6,6 +6,7 @@ export interface IUser {
     username?: string;
     password?: string;
     role?: string;
+    avatar?: string;
 }
 
 export interface IProduct {
@@ -16,6 +17,8 @@ export interface IProduct {
     isNew?: boolean;
     isLiked?: boolean;
     isSoldOut?: boolean;
+    stock?: number;
+    status?: string;
 }
 
 export interface IPasswordReset {

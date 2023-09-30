@@ -5,6 +5,7 @@ import { IUser } from "../../../types";
 import { UserApis } from "../../../apis/user";
 import { useParams } from "react-router-dom";
 import { useAppContext } from "../../../contexts/AppContext";
+import Title from "../../../components/title";
 
 const { Option } = Select;
 
@@ -46,10 +47,7 @@ const SettingPageProfile = () => {
     return (
         <div className="bg-white p-5 rounded-lg shadow-sm">
             <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                    <div className="rounded-lg h-[25px] w-[6px] bg-black"></div>
-                    <h2>Manage profile</h2>
-                </div>
+                <Title title="Manage profile" />
                 <Button size="large" onClick={() => form.submit()}>
                     Update profile
                 </Button>
@@ -65,7 +63,11 @@ const SettingPageProfile = () => {
                         </p>
                     </div>
                     <div className="col-span-2 text-gray-400 font-medium">
-                        <Avatar shape="square" size={150} />
+                        <Avatar
+                            shape="square"
+                            size={150}
+                            src={userInfo.avatar}
+                        />
                     </div>
                 </div>
                 <Divider />
