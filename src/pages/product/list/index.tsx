@@ -9,7 +9,6 @@ const ProductListPage = () => {
 
     useEffect(() => {
         getAllProducts().then((response) => {
-            console.log(response);
             setDataSource(response?.data);
         });
     }, []);
@@ -18,6 +17,7 @@ const ProductListPage = () => {
         <CustomTable
             tableTitle="Product list"
             addBtnTitle="Add product"
+            linkTo="/products/update-product"
             addBtnLink="/products/add-product"
             columns={columns}
             dataSource={dataSource}

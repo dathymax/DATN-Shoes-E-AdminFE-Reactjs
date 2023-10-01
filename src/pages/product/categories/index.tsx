@@ -7,6 +7,7 @@ const ProductCategoriesPage = () => {
 
     return (
         <CustomTable
+            linkTo="/products/update-category"
             tableTitle="Categories list"
             addBtnTitle="Add category"
             addBtnLink="/products/add-category"

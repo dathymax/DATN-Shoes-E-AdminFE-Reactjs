@@ -6,7 +6,6 @@ interface FormWrapperProps extends FormItemProps {
     labelDescription?: React.ReactNode | string;
     children?: React.ReactNode;
     noDivider?: boolean;
-    name?: string;
     isRequired?: boolean;
 }
 
@@ -14,7 +13,6 @@ const FormWrapper: FC<FormWrapperProps> = ({
     labelTitle,
     children,
     noDivider,
-    name,
     labelDescription,
     isRequired,
     ...rest
@@ -32,7 +30,7 @@ const FormWrapper: FC<FormWrapperProps> = ({
                     </p>
                 </div>
                 <div className="col-span-2 text-gray-400">
-                    <Form.Item name={name} className="m-0" {...rest} label="">
+                    <Form.Item className="m-0" {...rest} label="">
                         {children}
                     </Form.Item>
                 </div>

@@ -1,4 +1,5 @@
 export interface IUser {
+    _id?: string;
     id?: string;
     firstname?: string;
     lastname?: string;
@@ -10,15 +11,24 @@ export interface IUser {
 }
 
 export interface IProduct {
+    _id?: string;
     id?: string | number;
     img?: string;
-    name?: string;
     price?: string | number;
     isNew?: boolean;
     isLiked?: boolean;
     isSoldOut?: boolean;
     stock?: number;
-    status?: string;
+    name?: string;
+    rate?: number;
+    shoeType?: string;
+    color?: string;
+    size?: number;
+    description?: string;
+    category?: string;
+    status?: string | boolean;
+    discountType?: string;
+    setDiscount?: string;
 }
 
 export interface IPasswordReset {

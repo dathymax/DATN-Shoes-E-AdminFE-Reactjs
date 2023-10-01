@@ -26,3 +26,11 @@ export const getUserInfo = (): IUser => {
         return {};
     }
 };
+
+export const formatStatusFromBoolean = (status?: boolean | string) => {
+    if (status) {
+        return "active";
+    } else {
+        return "inactive";
+    }
+};

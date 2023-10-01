@@ -4,12 +4,13 @@ import { IProduct, IUser } from "../../../types";
 import Title from "../../../components/title";
 import { Button } from "antd";
 import { FiPlus } from "react-icons/fi";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 interface CustomTableProps extends TableProps<IUser | IProduct> {
     tableTitle?: string | React.ReactNode;
     addBtnTitle?: string | React.ReactNode;
     addBtnLink: string;
+    linkTo: string;
 }
 
 const CustomTable: FC<CustomTableProps> = ({
@@ -17,9 +18,23 @@ const CustomTable: FC<CustomTableProps> = ({
     addBtnTitle,
     columns,
     addBtnLink,
+    dataSource,
+    linkTo,
     ...rest
 }) => {
     const navigate = useNavigate();
+
+    const mapData = () => {
+        return dataSource?.map((item) => ({
+            ...item,
+            key: item?._id,
+            action: (
+                <Link to={`${linkTo}/${item._id}`} className="text-primary">
+                    Detail
+                </Link>
+            ),
+        }));
+    };
 
     return (
         <div className="bg-white px-4 py-5 rounded-lg">
@@ -45,6 +60,7 @@ const CustomTable: FC<CustomTableProps> = ({
                         title: "ACTION",
                     },
                 ])}
+                dataSource={mapData()}
                 {...rest}
             />
         </div>
