@@ -9,6 +9,7 @@ import ManageTransactionPage from "./pages/transaction/manage-transaction";
 import ManageReturnsPage from "./pages/transaction/manage-returns";
 import CustomersPage from "./pages/customers";
 import AddProductPage from "./pages/product/add-product";
+import ProductAddCategoryPage from "./pages/product/add-category";
 
 function App() {
     return (
@@ -33,6 +34,14 @@ function App() {
                 <Route
                     path="/products/update-product/:id"
                     element={<AddProductPage />}
+                />
+                <Route
+                    path="/products/add-category"
+                    element={<ProductAddCategoryPage />}
+                />
+                <Route
+                    path="/products/update-category/:id"
+                    element={<ProductAddCategoryPage />}
                 />
                 <Route
                     path="/transaction/manage-transaction"
