@@ -1,0 +1,1 @@
+export const UPLOAD_URL = "http://localhost:8000/uploads"

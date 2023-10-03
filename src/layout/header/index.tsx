@@ -7,13 +7,13 @@ import { AiOutlineUser } from "react-icons/ai";
 import { logout } from "../../apis/auth";
 import { useNavigate } from "react-router-dom";
 import { IoLogOutOutline, IoSettingsOutline } from "react-icons/io5";
-import { getUserInfo } from "../../helpers";
+import { useAppSelector } from "../../store/store";
 
 const { Header } = Layout;
 
 const AdminHeader = () => {
     const navigate = useNavigate();
-    const userInfo = getUserInfo();
+    const userInfo = useAppSelector((state) => state.auth.userInfo);
 
     const items = [
         {
@@ -47,9 +47,9 @@ const AdminHeader = () => {
             <InputSearch />
 
             <div className="user-action flex items-center gap-5">
-                <PiBellSimpleBold className="text-gray-500 text-[25px] cursor-pointer" />
+                {/* <PiBellSimpleBold className="text-gray-500 text-[25px] cursor-pointer" />
 
-                <div className="h-[30px] w-[2px] bg-gray-300"></div>
+                <div className="h-[30px] w-[2px] bg-gray-300"></div> */}
 
                 <Dropdown
                     menu={{

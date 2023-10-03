@@ -1,7 +1,10 @@
 import { Spin, notification } from "antd";
 import React, { useContext, useMemo, useState } from "react";
+import { IUser } from "../types";
 
 interface IAppContext {
+    user: IUser,
+    setUser: React.Dispatch<React.SetStateAction<IUser>>;
     loading: boolean;
     setLoading: React.Dispatch<React.SetStateAction<boolean>>;
     openAuthen: boolean;
@@ -27,6 +30,7 @@ export const useAppContext = () => {
 };
 
 const AppContextProvider = ({ children }: { children: React.ReactNode }) => {
+    const [user, setUser] = useState<IUser>({});
     const [loading, setLoading] = useState(false);
     const [openAuthen, setOpenAuthen] = useState(false);
     const [api, contextHolder] = notification.useNotification();
@@ -57,8 +61,9 @@ const AppContextProvider = ({ children }: { children: React.ReactNode }) => {
             setLoading,
             setOpenAuthen,
             openNotiError,
+            user, setUser
         }),
-        [loading, openAuthen]
+        [loading, openAuthen, user]
     );
 
     return (

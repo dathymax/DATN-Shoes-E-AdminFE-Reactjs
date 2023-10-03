@@ -6,6 +6,7 @@ import CustomInput from "../../../../custom/data-entry/input/Input";
 import CustomInputTextarea from "../../../../custom/data-entry/input/InputTextarea";
 import CustomSelect from "../../../../custom/data-entry/select";
 import CustomInputNumber from "../../../../custom/data-entry/input/InputNumber";
+import ProductUploadImage from "./Upload";
 
 const ProductAddInformation = () => {
     return (
@@ -72,14 +73,7 @@ const ProductAddInformation = () => {
                 <Switch />
             </FormWrapper>
 
-            <FormWrapper
-                name="photos"
-                labelTitle={"Photo Product"}
-                labelDescription={
-                    "Recommended minimum width 1080px X 1080px, with a max size of 5MB, only *.png, *.jpg and *.jpeg image files are accepted"
-                }
-                noDivider
-            ></FormWrapper>
+            <ProductUploadImage />
         </div>
     );
 };

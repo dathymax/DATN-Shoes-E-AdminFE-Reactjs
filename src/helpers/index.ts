@@ -27,7 +27,7 @@ export const getUserInfo = (): IUser => {
     }
 };
 
-export const formatStatusFromBoolean = (status?: boolean | string) => {
+export const formatStatusFromBoolean = (status?: string | boolean | React.ReactNode) => {
     if (status) {
         return "active";
     } else {

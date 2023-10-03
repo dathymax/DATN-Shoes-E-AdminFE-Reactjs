@@ -1,18 +1,21 @@
 import { Avatar, Button, Divider, Form, Input, Select } from "antd";
 import React, { useEffect } from "react";
-import { getUserInfo } from "../../../helpers";
 import { IUser } from "../../../types";
 import { UserApis } from "../../../apis/user";
 import { useParams } from "react-router-dom";
 import { useAppContext } from "../../../contexts/AppContext";
 import Title from "../../../components/title";
+import { UPLOAD_URL } from "../../../constant";
+import { useAppDispatch, useAppSelector } from "../../../store/store";
+import { setUserInfo } from "../../../store/features/auth";
 
 const { Option } = Select;
 
 const SettingPageProfile = () => {
     const { id } = useParams();
     const [form] = Form.useForm();
-    const userInfo = getUserInfo();
+    const dispatch = useAppDispatch();
+    const userInfo = useAppSelector((state) => state.auth.userInfo);
     const { setLoading, openNotiSuccess, openNotiError } = useAppContext();
 
     const selectBefore = (
@@ -22,21 +25,16 @@ const SettingPageProfile = () => {
     );
 
     useEffect(() => {
-        if (id) {
-            UserApis.getUserById(id).then((response) => {
-                form.setFieldsValue(response?.data);
-            });
-        } else {
-            form.setFieldsValue(userInfo);
-        }
+        form.setFieldsValue(userInfo);
     }, [id, userInfo]);
 
     const onFinish = (values: IUser) => {
         setLoading(true);
         UserApis.updateUser(id, values)
-            .then(() => {
+            .then((response) => {
                 setLoading(false);
                 openNotiSuccess("Update user");
+                dispatch(setUserInfo(response.data));
             })
             .catch(() => {
                 setLoading(false);
@@ -66,7 +64,7 @@ const SettingPageProfile = () => {
                         <Avatar
                             shape="square"
                             size={150}
-                            src={userInfo.avatar}
+                            src={`${UPLOAD_URL}/${userInfo.avatar}`}
                         />
                     </div>
                 </div>

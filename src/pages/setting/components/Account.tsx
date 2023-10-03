@@ -42,18 +42,6 @@ const SettingPageAccount = () => {
                         </Button>
                     </div>
                 </div>
-                <Divider />
-                <div className="grid grid-cols-3 gap-3">
-                    <div className="col-span-1 uppercase text-gray-400 font-medium">
-                        LOG OUT
-                    </div>
-                    <div className="col-span-1 uppercase text-gray-400 font-medium"></div>
-                    <div className="col-span-1 uppercase text-gray-400 font-medium text-end">
-                        <Button danger size="large">
-                            Log out
-                        </Button>
-                    </div>
-                </div>
             </div>
             <Modal
                 open={open}

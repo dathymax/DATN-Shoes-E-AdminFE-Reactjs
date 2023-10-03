@@ -13,14 +13,14 @@ const AdminSidebar = () => {
     const { pathname } = useLocation();
 
     const menuItems = [
-        {
-            label: "Dashboard",
-            key: "/dashboard",
-            icon: <BiHomeAlt2 style={{ fontSize: 18 }} />,
-            style: {
-                paddingLeft: "12px",
-            },
-        },
+        // {
+        //     label: "Dashboard",
+        //     key: "/dashboard",
+        //     icon: <BiHomeAlt2 style={{ fontSize: 18 }} />,
+        //     style: {
+        //         paddingLeft: "12px",
+        //     },
+        // },
         {
             label: "Products",
             key: "/products",

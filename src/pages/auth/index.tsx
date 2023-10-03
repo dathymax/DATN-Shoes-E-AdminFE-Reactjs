@@ -6,11 +6,15 @@ import { IUser } from "../../types";
 import { login } from "../../apis/auth";
 import { useAppContext } from "../../contexts/AppContext";
 import { useNavigate } from "react-router-dom";
+import jwtDecode from "jwt-decode";
+import { useAppDispatch } from "../../store/store";
+import { setUserInfo } from "../../store/features/auth";
 
 const AuthPage = () => {
     const navigate = useNavigate();
     const { loading, setLoading, openNotiSuccess, openNotiError } =
         useAppContext();
+    const dispatch = useAppDispatch();
 
     const onFinish = (values: IUser) => {
         setLoading(true);
@@ -18,9 +22,10 @@ const AuthPage = () => {
         login(values)
             .then((response) => {
                 setLoading(false);
-                navigate("/dashboard");
+                navigate("/products/list-products");
                 openNotiSuccess("Login");
                 localStorage.setItem("accessToken", response);
+                dispatch(setUserInfo({ user: jwtDecode(response), token: response }));
             })
             .catch(() => {
                 setLoading(false);

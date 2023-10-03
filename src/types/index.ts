@@ -26,7 +26,7 @@ export interface IProduct {
     size?: number;
     description?: string;
     category?: string;
-    status?: string | boolean;
+    status?: string | boolean | React.ReactNode;
     discountType?: string;
     setDiscount?: string;
 }
@@ -35,4 +35,13 @@ export interface IPasswordReset {
     password?: string;
     newPassword?: string;
     confirmPassword?: string;
+}
+
+export interface IImage {
+    _id?: string;
+    id?: string | number;
+    fileName?: string;
+    fileType?: string;
+    fileSize?: number;
+    filePath?: string;
 }
