@@ -10,7 +10,7 @@ const AdminLayout = () => {
     const token = useAppSelector((state) => state.auth.token);
 
     if (!token) {
-        <Navigate to={"/auth"} />;
+        return <Navigate to={"/auth"} />;
     }
 
     return (

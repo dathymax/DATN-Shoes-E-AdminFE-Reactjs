@@ -7,12 +7,14 @@ import { AiOutlineUser } from "react-icons/ai";
 import { logout } from "../../apis/auth";
 import { useNavigate } from "react-router-dom";
 import { IoLogOutOutline, IoSettingsOutline } from "react-icons/io5";
-import { useAppSelector } from "../../store/store";
+import { useAppDispatch, useAppSelector } from "../../store/store";
+import { removeAuthState } from "../../store/features/auth";
 
 const { Header } = Layout;
 
 const AdminHeader = () => {
     const navigate = useNavigate();
+    const dispatch = useAppDispatch();
     const userInfo = useAppSelector((state) => state.auth.userInfo);
 
     const items = [
@@ -32,6 +34,7 @@ const AdminHeader = () => {
             danger: true,
             onClick: () => {
                 logout();
+                dispatch(removeAuthState());
                 navigate("/auth");
             },
         },

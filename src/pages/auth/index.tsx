@@ -5,9 +5,9 @@ import { Button, Checkbox, Form, Input, Spin } from "antd";
 import { IUser } from "../../types";
 import { login } from "../../apis/auth";
 import { useAppContext } from "../../contexts/AppContext";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import jwtDecode from "jwt-decode";
-import { useAppDispatch } from "../../store/store";
+import { useAppDispatch, useAppSelector } from "../../store/store";
 import { setUserInfo } from "../../store/features/auth";
 
 const AuthPage = () => {
@@ -15,6 +15,7 @@ const AuthPage = () => {
     const { loading, setLoading, openNotiSuccess, openNotiError } =
         useAppContext();
     const dispatch = useAppDispatch();
+    const token = useAppSelector(state => state.auth.token);
 
     const onFinish = (values: IUser) => {
         setLoading(true);
@@ -22,7 +23,7 @@ const AuthPage = () => {
         login(values)
             .then((response) => {
                 setLoading(false);
-                navigate("/products/list-products");
+                window.location.href = "/products/list-products";
                 openNotiSuccess("Login");
                 localStorage.setItem("accessToken", response);
                 dispatch(setUserInfo({ user: jwtDecode(response), token: response }));
@@ -32,6 +33,10 @@ const AuthPage = () => {
                 openNotiError("Login");
             });
     };
+
+    if (token) {
+        return <Navigate to={"/products/list-products"} />
+    }
 
     return (
         <Spin spinning={loading}>

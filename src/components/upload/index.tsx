@@ -35,11 +35,11 @@ const Upload: FC<UploadProps> = ({ fileId, fileName }) => {
         }).catch(() => { })
     }
 
-    // useEffect(() => {
-    //     return () => {
-    //         dispatch(removeAllFile())
-    //     };
-    // }, [])
+    useEffect(() => {
+        return () => {
+            dispatch(removeAllFile())
+        };
+    }, [])
 
     return (
         fileName
