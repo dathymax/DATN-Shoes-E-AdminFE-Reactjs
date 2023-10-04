@@ -7,16 +7,21 @@ import { useNavigate, useParams } from "react-router-dom";
 import { ProductApis } from "../../../apis/product";
 import { formatStatusFromBoolean } from "../../../helpers";
 import { useAppContext } from "../../../contexts/AppContext";
+import { useAppDispatch, useAppSelector } from "../../../store/store";
+import { addFiles } from "../../../store/features/file";
 
 const AddProductPage = () => {
     const { id } = useParams();
     const [form] = Form.useForm();
     const navigate = useNavigate();
+    const dispatch = useAppDispatch();
     const { openNotiSuccess, openNotiError } = useAppContext();
+    const images = useAppSelector(state => state.file.images);
 
     useEffect(() => {
         if (id) {
             ProductApis.getProductById(id).then((response) => {
+                dispatch(addFiles(response?.data?.images))
                 form.setFieldsValue(response?.data);
             });
         }
@@ -26,6 +31,7 @@ const AddProductPage = () => {
         values = {
             ...values,
             status: formatStatusFromBoolean(values?.status),
+            images: images,
         };
 
         if (id) {

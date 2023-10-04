@@ -1,0 +1,28 @@
+.upload_preview {
+	position: relative;
+}
+
+.upload_preview:hover {
+	cursor: pointer;
+}
+
+.upload_preview:hover .upload__actions {
+	z-index: 10;
+	cursor: pointer;
+}
+
+.upload__actions {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: rgba(255, 255, 255, 0.16);
+	border-radius: 16px;
+	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+	backdrop-filter: blur(2.7px);
+	-webkit-backdrop-filter: blur(2.7px);
+	border: 1px solid rgba(255, 255, 255, 0.18);
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	border-radius: 8px;
+	top: 0;
+	z-index: -1;
+}

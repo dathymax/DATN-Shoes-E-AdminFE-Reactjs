@@ -17,16 +17,28 @@ const ProductUploadImage = () => {
             </div>
             <div className="col-span-2 grid grid-cols-4 gap-7 text-gray-400">
                 <div className="col-span-1">
-                    <Upload filePath={images[0]?.fileName} />
+                    <Upload
+                        fileId={images[0]?._id}
+                        fileName={images[0]?.fileName}
+                    />
                 </div>
                 <div className="col-span-1">
-                    <Upload filePath={images[1]?.fileName} />
+                    <Upload
+                        fileId={images[1]?._id}
+                        fileName={images[1]?.fileName}
+                    />
                 </div>
                 <div className="col-span-1">
-                    <Upload filePath={images[2]?.fileName} />
+                    <Upload
+                        fileId={images[2]?._id}
+                        fileName={images[2]?.fileName}
+                    />
                 </div>
                 <div className="col-span-1">
-                    <Upload filePath={images[3]?.fileName} />
+                    <Upload
+                        fileId={images[3]?._id}
+                        fileName={images[3]?.fileName}
+                    />
                 </div>
             </div>
         </div>

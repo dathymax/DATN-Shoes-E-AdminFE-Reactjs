@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from "../../../store/store";
 import { setAllProduct } from "../../../store/features/products";
 import { IProduct } from "../../../types";
 import { Tag } from "antd";
+import { UPLOAD_URL } from "../../../constant";
 
 export const mapStatusToTag = (status: string | boolean | React.ReactNode) => {
     switch (status) {
@@ -29,6 +30,16 @@ const ProductListPage = () => {
         return products.map(product => {
             return {
                 ...product,
+                product: product?.images && product?.images?.length > 0 && <div className="flex items-start gap-3">
+                    <img
+                        className="w-[100px] h-[100px] rounded-lg object-cover"
+                        src={`${UPLOAD_URL}/${product?.images?.[0]?.fileName}`} alt="Image"
+                    />
+                    <div className="font-medium">
+                        <p>{product.name}</p>
+                        <p>{product.category}</p>
+                    </div>
+                </div>,
                 status: mapStatusToTag(product.status),
                 key: product._id
             }

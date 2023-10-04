@@ -13,13 +13,13 @@ export interface IUser {
 export interface IProduct {
     _id?: string;
     id?: string | number;
-    img?: string;
+    images?: IImage[];
     price?: string | number;
     isNew?: boolean;
     isLiked?: boolean;
     isSoldOut?: boolean;
     stock?: number;
-    name?: string;
+    name?: string | React.ReactNode;
     rate?: number;
     shoeType?: string;
     color?: string;

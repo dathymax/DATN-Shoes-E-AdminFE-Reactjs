@@ -29,7 +29,10 @@ const CustomTable: FC<CustomTableProps> = ({
             ...item,
             key: item?._id,
             action: (
-                <Link to={`${linkTo}/${item._id}`} className="text-primary">
+                <Link
+                    to={`${linkTo}/${item._id}`}
+                    className="text-primary font-bold"
+                >
                     Detail
                 </Link>
             ),
