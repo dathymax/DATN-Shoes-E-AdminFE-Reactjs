@@ -4,6 +4,7 @@ import { IPasswordReset } from "../../../types";
 import { updatePassword } from "../../../apis/auth";
 import { useParams } from "react-router-dom";
 import { useAppContext } from "../../../contexts/AppContext";
+import CustomForm from "../../../custom/data-entry/form";
 
 interface UpdatePasswordProps {
     handleClose?: () => void;
@@ -33,7 +34,7 @@ const UpdatePassword: FC<UpdatePasswordProps> = ({ handleClose }) => {
     };
 
     return (
-        <Form layout="vertical" onFinish={onFinish}>
+        <CustomForm onFinish={onFinish}>
             <Form.Item
                 name="password"
                 label="Current password"
@@ -104,7 +105,7 @@ const UpdatePassword: FC<UpdatePasswordProps> = ({ handleClose }) => {
                     Save
                 </Button>
             </div>
-        </Form>
+        </CustomForm>
     );
 };
 

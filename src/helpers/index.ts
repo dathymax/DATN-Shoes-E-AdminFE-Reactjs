@@ -1,5 +1,6 @@
 import jwt_decode from "jwt-decode";
 import { IUser } from "../types";
+import { UPLOAD_URL } from "../constant";
 
 const accessToken = localStorage.getItem("accessToken");
 
@@ -27,10 +28,16 @@ export const getUserInfo = (): IUser => {
     }
 };
 
-export const formatStatusFromBoolean = (status?: string | boolean | React.ReactNode) => {
+export const formatStatusFromBoolean = (
+    status?: string | boolean | React.ReactNode
+) => {
     if (status) {
         return "active";
     } else {
         return "inactive";
     }
 };
+
+export function genUploadUrl(fileName?: string) {
+    return `${UPLOAD_URL}/${fileName}`;
+}

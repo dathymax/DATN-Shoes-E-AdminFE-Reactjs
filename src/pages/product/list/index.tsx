@@ -11,45 +11,60 @@ import { UPLOAD_URL } from "../../../constant";
 export const mapStatusToTag = (status: string | boolean | React.ReactNode) => {
     switch (status) {
         case "active":
-            return <Tag color="green" className="capitalize">{status}</Tag>
+            return (
+                <Tag color="green" className="capitalize">
+                    {status}
+                </Tag>
+            );
         case "inactive":
-            return <Tag color="red" className="capitalize">{status}</Tag>
+            return (
+                <Tag color="red" className="capitalize">
+                    {status}
+                </Tag>
+            );
         default:
             break;
     }
-}
+};
 
 const ProductListPage = () => {
     const dispatch = useAppDispatch();
     const { getAllProducts } = ProductApis;
-    const items = useAppSelector(state => state.products.items);
+    const items = useAppSelector((state) => state.products.items);
 
     const mapData = (products: IProduct[]) => {
         if (!products || products.length <= 0) return [];
 
-        return products.map(product => {
+        return products.map((product) => {
             return {
                 ...product,
-                product: product?.images && product?.images?.length > 0 && <div className="flex items-start gap-3">
-                    <img
-                        className="w-[100px] h-[100px] rounded-lg object-cover"
-                        src={`${UPLOAD_URL}/${product?.images?.[0]?.fileName}`} alt="Image"
-                    />
-                    <div className="font-medium">
-                        <p>{product.name}</p>
-                        <p>{product.category}</p>
+                product: product?.images && product?.images?.length > 0 && (
+                    <div className="flex items-start gap-3">
+                        <img
+                            className="w-[100px] h-[100px] rounded-lg object-cover"
+                            src={`${UPLOAD_URL}/${product?.images?.[0]?.fileName}`}
+                            alt="Image"
+                        />
+                        <div className="font-medium">
+                            <p>{product.name}</p>
+                            <p>{product.category}</p>
+                        </div>
                     </div>
-                </div>,
+                ),
                 status: mapStatusToTag(product.status),
-                key: product._id
-            }
-        })
-    }
+                key: product._id,
+            };
+        });
+    };
 
     useEffect(() => {
-        getAllProducts().then((response) => {
-            dispatch(setAllProduct(response?.data));
-        });
+        getAllProducts()
+            .then((response) => {
+                dispatch(setAllProduct(response?.data));
+            })
+            .catch(() => {
+                dispatch(setAllProduct([]));
+            });
     }, []);
 
     return (

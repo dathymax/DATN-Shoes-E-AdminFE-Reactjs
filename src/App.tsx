@@ -10,6 +10,7 @@ import ManageReturnsPage from "./pages/transaction/manage-returns";
 import CustomersPage from "./pages/customers";
 import AddProductPage from "./pages/product/add-product";
 import ProductAddCategoryPage from "./pages/product/add-category";
+import CustomerViewDetailPage from "./pages/customers/view";
 
 function App() {
     return (
@@ -52,6 +53,10 @@ function App() {
                     element={<ManageReturnsPage />}
                 />
                 <Route path="/customers" element={<CustomersPage />} />
+                <Route
+                    path="/customers/:id"
+                    element={<CustomerViewDetailPage />}
+                />
             </Route>
             <Route path="/auth" element={<AuthPage />} />
             <Route path="/*" element={<AdminLayout />} />

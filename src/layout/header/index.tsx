@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { IoLogOutOutline, IoSettingsOutline } from "react-icons/io5";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import { removeAuthState } from "../../store/features/auth";
+import { UPLOAD_URL } from "../../constant";
 
 const { Header } = Layout;
 
@@ -23,7 +24,7 @@ const AdminHeader = () => {
             key: "setting",
             icon: <IoSettingsOutline style={{ fontSize: 20 }} />,
             onClick: () => {
-                navigate(`/setting/${userInfo.id}`);
+                navigate(`/setting/${userInfo?.id}`);
             },
         },
         { type: "divider" },
@@ -61,13 +62,17 @@ const AdminHeader = () => {
                     trigger={["click"]}
                 >
                     <div className="cursor-pointer flex items-center justify-center gap-3">
-                        <Avatar size={40} icon={<AiOutlineUser />} />
+                        <Avatar
+                            size={40}
+                            icon={<AiOutlineUser />}
+                            src={`${UPLOAD_URL}/${userInfo?.avatar}`}
+                        />
                         <div className="h-full">
                             <p className="mb-2 leading-[13px] font-bold">
-                                {userInfo?.firstname} {userInfo.lastname}
+                                {userInfo?.firstname} {userInfo?.lastname}
                             </p>
                             <p className="text-gray-400 leading-[13px]">
-                                {userInfo.role}
+                                {userInfo?.role}
                             </p>
                         </div>
                         <BsChevronDown className="text-gray-500 text-[20px]" />

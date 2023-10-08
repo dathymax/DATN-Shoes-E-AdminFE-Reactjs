@@ -9,6 +9,9 @@ import { formatStatusFromBoolean } from "../../../helpers";
 import { useAppContext } from "../../../contexts/AppContext";
 import { useAppDispatch, useAppSelector } from "../../../store/store";
 import { addFiles } from "../../../store/features/file";
+import CustomForm from "../../../custom/data-entry/form";
+import { CategoryApis } from "../../../apis/category";
+import { setAllCategory } from "../../../store/features/category";
 
 const AddProductPage = () => {
     const { id } = useParams();
@@ -16,12 +19,22 @@ const AddProductPage = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const { openNotiSuccess, openNotiError } = useAppContext();
-    const images = useAppSelector(state => state.file.images);
+    const images = useAppSelector((state) => state.file.images);
+
+    useEffect(() => {
+        CategoryApis.getAllCategories()
+            .then((response) => {
+                dispatch(setAllCategory(response?.data));
+            })
+            .catch(() => {
+                dispatch(setAllCategory([]));
+            });
+    }, []);
 
     useEffect(() => {
         if (id) {
             ProductApis.getProductById(id).then((response) => {
-                dispatch(addFiles(response?.data?.images))
+                dispatch(addFiles(response?.data?.images));
                 form.setFieldsValue(response?.data);
             });
         }
@@ -56,7 +69,7 @@ const AddProductPage = () => {
     };
 
     return (
-        <Form form={form} onFinish={onFinish}>
+        <CustomForm form={form} onFinish={onFinish}>
             <div className="flex items-center justify-between mb-3">
                 <h1 className="font-medium">Add product</h1>
                 <div className="flex items-center justify-between">
@@ -67,7 +80,7 @@ const AddProductPage = () => {
             </div>
             <ProductAddInformation />
             <ProductAddPrice />
-        </Form>
+        </CustomForm>
     );
 };
 

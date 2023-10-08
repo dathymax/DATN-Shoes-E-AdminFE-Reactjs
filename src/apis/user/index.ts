@@ -4,6 +4,10 @@ import { IUser } from "../../types";
 const url = "/users";
 
 export const UserApis = {
+    getAllUsers: async () => {
+        const response = await Axios_instance.get(url);
+        return response?.data || [];
+    },
     getUserById: async function (id?: string) {
         const response = await Axios_instance.get(`${url}/${id}`);
         return response?.data || {};

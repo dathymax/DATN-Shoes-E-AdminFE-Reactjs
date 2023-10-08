@@ -1,6 +1,5 @@
-import { PayloadAction, createSelector, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { IImage } from "../../types";
-import { RootState } from "../store";
 
 interface FileState {
     images: IImage[];
@@ -21,13 +20,14 @@ export const FileSlice = createSlice({
             state.images = action.payload;
         },
         removeAllFile: (state) => {
-            state.images = []
+            state.images = [];
         },
         removeFileById: (state, action: PayloadAction<{ fileId?: string }>) => {
-            state.images.filter(image => image._id !== action.payload.fileId);
-        }
+            state.images.filter((image) => image._id !== action.payload.fileId);
+        },
     },
 });
 
 export default FileSlice.reducer;
-export const { addFile, removeAllFile, addFiles, removeFileById } = FileSlice.actions;
+export const { addFile, removeAllFile, addFiles, removeFileById } =
+    FileSlice.actions;

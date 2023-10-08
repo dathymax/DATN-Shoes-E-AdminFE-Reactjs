@@ -2,9 +2,11 @@ import { Button, Divider, Modal } from "antd";
 import React, { useState } from "react";
 import UpdatePassword from "./UpdatePassword";
 import Title from "../../../components/title";
+import { useAppSelector } from "../../../store/store";
 
 const SettingPageAccount = () => {
     const [open, setOpen] = useState(false);
+    const userInfo = useAppSelector((state) => state.auth.userInfo);
 
     const handleOpen = () => {
         setOpen(true);
@@ -24,7 +26,7 @@ const SettingPageAccount = () => {
                         Email
                     </div>
                     <div className="col-span-1 uppercase text-gray-400 font-medium">
-                        dat09ohyeah@mail.com
+                        {userInfo?.email}
                     </div>
                     <div className="col-span-1 uppercase text-gray-400 font-medium text-end"></div>
                 </div>

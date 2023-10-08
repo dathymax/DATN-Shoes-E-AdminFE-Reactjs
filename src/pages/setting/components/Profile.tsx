@@ -1,6 +1,6 @@
 import { Avatar, Button, Divider, Form, Input, Select } from "antd";
-import React, { useEffect } from "react";
-import { IUser } from "../../../types";
+import React, { useEffect, useState } from "react";
+import { IImage, IUser } from "../../../types";
 import { UserApis } from "../../../apis/user";
 import { useParams } from "react-router-dom";
 import { useAppContext } from "../../../contexts/AppContext";
@@ -8,6 +8,9 @@ import Title from "../../../components/title";
 import { UPLOAD_URL } from "../../../constant";
 import { useAppDispatch, useAppSelector } from "../../../store/store";
 import { setUserInfo } from "../../../store/features/auth";
+import Upload from "../../../components/upload";
+import { ImageApis } from "../../../apis/image";
+import CustomForm from "../../../custom/data-entry/form";
 
 const { Option } = Select;
 
@@ -15,8 +18,26 @@ const SettingPageProfile = () => {
     const { id } = useParams();
     const [form] = Form.useForm();
     const dispatch = useAppDispatch();
+    const [image, setImage] = useState<IImage>({});
+    const token = useAppSelector((state) => state.auth.token);
     const userInfo = useAppSelector((state) => state.auth.userInfo);
     const { setLoading, openNotiSuccess, openNotiError } = useAppContext();
+
+    const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files.length > 0) {
+            const file = e.target.files[0];
+            const formData = new FormData();
+            formData.append("file", file);
+
+            ImageApis.createImage(formData)
+                .then((response) => {
+                    setImage(response);
+                })
+                .catch(() => {
+                    setImage({});
+                });
+        }
+    };
 
     const selectBefore = (
         <Select defaultValue="+84">
@@ -29,12 +50,22 @@ const SettingPageProfile = () => {
     }, [id, userInfo]);
 
     const onFinish = (values: IUser) => {
+        values = {
+            ...values,
+            avatar: image?.fileName,
+        };
+
         setLoading(true);
         UserApis.updateUser(id, values)
             .then((response) => {
                 setLoading(false);
                 openNotiSuccess("Update user");
-                dispatch(setUserInfo(response.data));
+                dispatch(
+                    setUserInfo({
+                        user: response.data,
+                        token: token,
+                    })
+                );
             })
             .catch(() => {
                 setLoading(false);
@@ -51,7 +82,7 @@ const SettingPageProfile = () => {
                 </Button>
             </div>
             <Divider />
-            <Form form={form} onFinish={onFinish}>
+            <CustomForm form={form} onFinish={onFinish}>
                 <div className="grid grid-cols-3 gap-3">
                     <div className="col-span-1 font-medium">
                         <p>Avatar</p>
@@ -61,11 +92,21 @@ const SettingPageProfile = () => {
                         </p>
                     </div>
                     <div className="col-span-2 text-gray-400 font-medium">
-                        <Avatar
-                            shape="square"
-                            size={150}
-                            src={`${UPLOAD_URL}/${userInfo.avatar}`}
-                        />
+                        {userInfo?.avatar || image.fileName ? (
+                            <Avatar
+                                shape="square"
+                                size={150}
+                                src={
+                                    userInfo?.avatar
+                                        ? `${UPLOAD_URL}/${userInfo?.avatar}`
+                                        : `${UPLOAD_URL}/${image.fileName}`
+                                }
+                            />
+                        ) : (
+                            <div className="w-[30%]">
+                                <Upload isAvatar handleUpload={handleUpload} />
+                            </div>
+                        )}
                     </div>
                 </div>
                 <Divider />
@@ -150,7 +191,7 @@ const SettingPageProfile = () => {
                     </div>
                 </div>
                 <Divider />
-            </Form>
+            </CustomForm>
         </div>
     );
 };

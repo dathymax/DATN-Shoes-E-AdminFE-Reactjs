@@ -1,16 +1,16 @@
 import { Table, TableProps } from "antd";
 import React, { FC } from "react";
-import { IProduct, IUser } from "../../../types";
+import { ICategory, IProduct, IUser } from "../../../types";
 import Title from "../../../components/title";
 import { Button } from "antd";
 import { FiPlus } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
 
-interface CustomTableProps extends TableProps<IUser | IProduct> {
+interface CustomTableProps extends TableProps<IUser | IProduct | ICategory> {
     tableTitle?: string | React.ReactNode;
     addBtnTitle?: string | React.ReactNode;
-    addBtnLink: string;
-    linkTo: string;
+    addBtnLink?: string;
+    linkTo?: string;
 }
 
 const CustomTable: FC<CustomTableProps> = ({
@@ -45,15 +45,19 @@ const CustomTable: FC<CustomTableProps> = ({
                 <Title title={tableTitle} />
 
                 <div className="flex items-center justify-center gap-3">
-                    <Button
-                        size="large"
-                        type="primary"
-                        className="flex items-center justify-center gap-2"
-                        onClick={() => navigate(addBtnLink)}
-                    >
-                        <FiPlus className="text-[20px]" />
-                        {addBtnTitle}
-                    </Button>
+                    {addBtnLink ? (
+                        <Button
+                            size="large"
+                            type="primary"
+                            className="flex items-center justify-center gap-2"
+                            onClick={() => navigate(addBtnLink)}
+                        >
+                            <FiPlus className="text-[20px]" />
+                            {addBtnTitle}
+                        </Button>
+                    ) : (
+                        <></>
+                    )}
                 </div>
             </div>
             <Table

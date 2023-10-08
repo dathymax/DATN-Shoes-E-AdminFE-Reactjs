@@ -7,8 +7,11 @@ import CustomInputTextarea from "../../../../custom/data-entry/input/InputTextar
 import CustomSelect from "../../../../custom/data-entry/select";
 import CustomInputNumber from "../../../../custom/data-entry/input/InputNumber";
 import ProductUploadImage from "./Upload";
+import { useAppSelector } from "../../../../store/store";
 
 const ProductAddInformation = () => {
+    const categories = useAppSelector((state) => state.category.categories);
+
     return (
         <div className="bg-white px-4 py-5 rounded-lg mb-5">
             <Title title="Product information" />
@@ -49,12 +52,10 @@ const ProductAddInformation = () => {
             >
                 <CustomSelect
                     placeholder="Select Category"
-                    options={[
-                        {
-                            label: "Category 1",
-                            value: "category1",
-                        },
-                    ]}
+                    options={categories.map((category) => ({
+                        label: category.name,
+                        value: category.name,
+                    }))}
                 />
             </FormWrapper>
 

@@ -3,26 +3,29 @@ import { IUser } from "../../types";
 import { RootState } from "../store";
 
 interface IInitialState {
-    userInfo: IUser,
-    token: string
+    userInfo?: IUser;
+    token?: string;
 }
 
 const initialState: IInitialState = {
     userInfo: {},
-    token: ""
+    token: "",
 };
 
 export const AuthSlice = createSlice({
     name: "auth",
     initialState,
     reducers: {
-        setUserInfo: (state, action: PayloadAction<{ user: IUser, token: string }>) => {
+        setUserInfo: (
+            state,
+            action: PayloadAction<{ user?: IUser; token?: string }>
+        ) => {
             state.userInfo = action.payload.user;
-            state.token = action.payload.token
+            state.token = action.payload.token;
         },
         removeAuthState: (state) => {
             state.userInfo = {};
-            state.token = ""
+            state.token = "";
         },
     },
 });
@@ -33,5 +36,5 @@ export const { setUserInfo, removeAuthState } = AuthSlice.actions;
 const auth = (state: RootState) => state.auth;
 
 export const userInfoQtySelector = createSelector(auth, (userInfo) => {
-    return userInfo
+    return userInfo;
 });

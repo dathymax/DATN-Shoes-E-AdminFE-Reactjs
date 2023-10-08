@@ -7,7 +7,16 @@ export interface IUser {
     username?: string;
     password?: string;
     role?: string;
+    phoneNumber?: string;
+    address?: string;
+    addressLabel?: string;
+    country?: string;
+    province?: string;
+    district?: string;
+    postalCode?: string;
+    city?: string;
     avatar?: string;
+    updatedAt?: Date | string;
 }
 
 export interface IProduct {
@@ -44,4 +53,13 @@ export interface IImage {
     fileType?: string;
     fileSize?: number;
     filePath?: string;
+}
+
+export interface ICategory {
+    _id?: string;
+    id?: string | number;
+    name?: string;
+    description?: string;
+    status?: string;
+    thumbnail?: string;
 }
