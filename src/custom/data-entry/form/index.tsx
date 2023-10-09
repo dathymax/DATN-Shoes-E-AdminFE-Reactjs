@@ -7,7 +7,15 @@ interface CustomFormProps extends FormProps {
 
 const CustomForm: FC<CustomFormProps> = ({ children, ...rest }) => {
     return (
-        <Form {...rest} layout="vertical" scrollToFirstError>
+        <Form
+            {...rest}
+            layout="vertical"
+            scrollToFirstError={{
+                behavior: 'smooth',
+                block: 'center',
+                inline: 'center',
+            }}
+        >
             {children}
         </Form>
     );
