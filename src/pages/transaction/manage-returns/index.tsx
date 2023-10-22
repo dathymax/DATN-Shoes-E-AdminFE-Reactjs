@@ -21,7 +21,7 @@ const ManageReturnsPage = () => {
     return (
         <CustomTable
             tableTitle="Returns list"
-            linkTo="/returns/view"
+            linkTo="/transaction/manage-returns"
             columns={columns}
             dataSource={items}
         />

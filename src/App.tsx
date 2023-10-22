@@ -11,6 +11,8 @@ import CustomersPage from "./pages/customers";
 import AddProductPage from "./pages/product/add-product";
 import ProductAddCategoryPage from "./pages/product/add-category";
 import CustomerViewDetailPage from "./pages/customers/view";
+import TransactionViewPage from "./pages/transaction/transaction-view";
+import ReturnsViewPage from "./pages/transaction/returns-view";
 
 function App() {
     return (
@@ -49,8 +51,16 @@ function App() {
                     element={<ManageTransactionPage />}
                 />
                 <Route
+                    path="/transaction/manage-transaction/:id"
+                    element={<TransactionViewPage />}
+                />
+                <Route
                     path="/transaction/manage-returns"
                     element={<ManageReturnsPage />}
+                />
+                <Route
+                    path="/transaction/manage-returns/:id"
+                    element={<ReturnsViewPage />}
                 />
                 <Route path="/customers" element={<CustomersPage />} />
                 <Route
