@@ -3,6 +3,7 @@ import Title from '../../../../components/title'
 import { Divider } from 'antd'
 import FormWrapper from '../../../../components/form/FormWrapper'
 import CustomInputTextarea from '../../../../custom/data-entry/input/InputTextarea'
+import Uploads from './Uploads'
 
 const ReturnsDetail = () => {
     return (
@@ -16,6 +17,8 @@ const ReturnsDetail = () => {
             >
                 <CustomInputTextarea placeholder="" />
             </FormWrapper>
+
+            <Uploads />
         </div>
     )
 }

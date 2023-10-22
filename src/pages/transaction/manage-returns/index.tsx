@@ -1,17 +1,17 @@
 import React, { useEffect } from "react";
 import CustomTable from "../../../custom/data-display/table";
 import { useAppDispatch, useAppSelector } from "../../../store/store";
-import { ReturnsApis } from "../../../apis/returns";
 import { columns } from "./constant/columns";
 import { setAllReturns } from "../../../store/features/returns";
+import { TransactionApis } from "../../../apis/transaction";
 
 const ManageReturnsPage = () => {
     const dispatch = useAppDispatch();
-    const { getAll } = ReturnsApis;
+    const { getAllReturnsTransaction } = TransactionApis;
     const items = useAppSelector((state) => state.returns.items);
 
     useEffect(() => {
-        getAll()
+        getAllReturnsTransaction()
             .then((response) => {
                 dispatch(setAllReturns(response?.data));
             })

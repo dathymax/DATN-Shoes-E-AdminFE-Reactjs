@@ -6,12 +6,12 @@ import ReturnsDetail from './components/ReturnsDetail';
 import ProductDetail from './components/ProductDetail';
 import Shipping from '../components/Shipping';
 import PurchasedDetail from './components/PurchasedDetail';
-import { ReturnsApis } from '../../../apis/returns';
+import { TransactionApis } from '../../../apis/transaction';
 
 const ReturnsViewPage = () => {
     const { id } = useParams();
     const [form] = Form.useForm();
-    const { getById } = ReturnsApis;
+    const { getById } = TransactionApis;
 
     useEffect(() => {
         getById(id).then(response => {

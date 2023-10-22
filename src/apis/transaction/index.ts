@@ -8,6 +8,10 @@ export const TransactionApis = {
         const response = await Axios_instance.get(url);
         return response?.data || [];
     },
+    getAllReturnsTransaction: async function () {
+        const response = await Axios_instance.get(`${url}/returns`);
+        return response?.data || [];
+    },
     getById: async function (id?: string) {
         const response = await Axios_instance.get(`${url}/${id}`);
         return response?.data || {};
