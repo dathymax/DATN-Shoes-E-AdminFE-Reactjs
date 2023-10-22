@@ -1,4 +1,4 @@
-import { Pagination, Table, TableProps } from "antd";
+import { Table, TableProps } from "antd";
 import React, { FC } from "react";
 import { ICategory, IProduct, IUser } from "../../../types";
 import Title from "../../../components/title";
@@ -69,7 +69,7 @@ const CustomTable: FC<CustomTableProps> = ({
                 ])}
                 dataSource={mapData()}
                 pagination={{
-                    pageSize: 5
+                    pageSize: 5,
                 }}
                 {...rest}
             />

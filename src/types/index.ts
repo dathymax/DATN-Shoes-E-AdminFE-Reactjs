@@ -63,3 +63,35 @@ export interface ICategory {
     status?: string;
     thumbnail?: string;
 }
+
+export interface IPurchasedProduct {
+    name?: string;
+    category?: string;
+    sku?: string;
+    size?: string;
+    image?: string;
+    color?: string;
+    quantity?: number;
+    price?: number | string;
+    total?: number | string;
+    transactionExt?: string;
+}
+
+export interface ITransaction {
+    id?: string;
+    _id?: string;
+    transactionNumber?: number | string;
+    date?: Date | string;
+    invoice?: string;
+    customerName?: string;
+    phoneNumber?: string | number;
+    status?: string;
+    receiptNumber?: string | number;
+    address?: string;
+    payment?: string;
+    purchasedProducts?: IPurchasedProduct[];
+    discount?: string;
+    shipping?: string | number;
+    tax?: string | number;
+    subTotal?: string | number;
+}

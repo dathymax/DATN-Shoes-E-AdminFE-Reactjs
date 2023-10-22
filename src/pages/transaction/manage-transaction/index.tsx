@@ -1,7 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../../../store/store";
+import { TransactionApis } from "../../../apis/transaction";
+import CustomTable from "../../../custom/data-display/table";
+import { columns } from "./constant/columns";
+import { setAllTransaction } from "../../../store/features/transaction";
 
 const ManageTransactionPage = () => {
-    return <div>ManageTransactionPage</div>;
+    const dispatch = useAppDispatch();
+    const { getAll } = TransactionApis;
+    const items = useAppSelector((state) => state.transaction.items);
+
+    useEffect(() => {
+        getAll()
+            .then((response) => {
+                dispatch(setAllTransaction(response?.data));
+            })
+            .catch(() => {});
+    }, []);
+
+    return (
+        <CustomTable
+            tableTitle="Transaction list"
+            linkTo="/transaction/view"
+            columns={columns}
+            dataSource={items}
+        />
+    );
 };
 
 export default ManageTransactionPage;
