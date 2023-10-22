@@ -95,3 +95,7 @@ export interface ITransaction {
     tax?: string | number;
     subTotal?: string | number;
 }
+
+export interface IReturns {
+
+}

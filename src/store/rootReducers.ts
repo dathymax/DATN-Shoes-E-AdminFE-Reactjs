@@ -4,6 +4,7 @@ import { ProductSlice } from "./features/products";
 import { FileSlice } from "./features/file";
 import { CategorySlice } from "./features/category";
 import { TransactionSlice } from "./features/transaction";
+import { ReturnsSlice } from "./features/returns";
 
 const rootReducer = combineReducers({
     auth: AuthSlice.reducer,
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
     file: FileSlice.reducer,
     category: CategorySlice.reducer,
     transaction: TransactionSlice.reducer,
+    returns: ReturnsSlice.reducer,
 });
 
 export default rootReducer;

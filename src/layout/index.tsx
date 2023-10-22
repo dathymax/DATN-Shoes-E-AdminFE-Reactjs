@@ -7,11 +7,11 @@ import { Navigate } from "react-router-dom";
 import { useAppSelector } from "../store/store";
 
 const AdminLayout = () => {
-    const token = useAppSelector((state) => state.auth.token);
+    // const token = useAppSelector((state) => state.auth.token);
 
-    if (!token) {
-        return <Navigate to={"/auth"} />;
-    }
+    // if (!token) {
+    //     return <Navigate to={"/auth"} />;
+    // }
 
     return (
         <Layout>
