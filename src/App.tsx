@@ -13,13 +13,15 @@ import ProductAddCategoryPage from "./pages/product/add-category";
 import CustomerViewDetailPage from "./pages/customers/view";
 import TransactionViewPage from "./pages/transaction/transaction-view";
 import ReturnsViewPage from "./pages/transaction/returns-view";
+import PromoCodePage from "./pages/promo-code";
+import PromoCodeViewPage from "./pages/promo-code/services/view";
 
 function App() {
     return (
         <Routes>
             <Route element={<AdminLayout />}>
-                <Route path="/" element={<DashboardPage />} />
-                <Route path="/dashboard" element={<DashboardPage />} />
+                <Route path="/" element={<ProductListPage />} />
+                {/* <Route path="/dashboard" element={<DashboardPage />} /> */}
                 <Route path="/setting" element={<SettingPage />} />
                 <Route path="/setting/:id" element={<SettingPage />} />
                 <Route
@@ -67,6 +69,8 @@ function App() {
                     path="/customers/:id"
                     element={<CustomerViewDetailPage />}
                 />
+                <Route path="/promo-code" element={<PromoCodePage />} />
+                <Route path="/promo-code/:id" element={<PromoCodeViewPage />} />
             </Route>
             <Route path="/auth" element={<AuthPage />} />
             <Route path="/*" element={<AdminLayout />} />

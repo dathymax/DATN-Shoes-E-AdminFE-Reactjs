@@ -5,6 +5,8 @@ import { FileSlice } from "./features/file";
 import { CategorySlice } from "./features/category";
 import { TransactionSlice } from "./features/transaction";
 import { ReturnsSlice } from "./features/returns";
+import { PromoCodeSlice } from "./features/promo-code";
+import { LayoutSlice } from "./features/layout";
 
 const rootReducer = combineReducers({
     auth: AuthSlice.reducer,
@@ -13,6 +15,8 @@ const rootReducer = combineReducers({
     category: CategorySlice.reducer,
     transaction: TransactionSlice.reducer,
     returns: ReturnsSlice.reducer,
+    promoCode: PromoCodeSlice.reducer,
+    layout: LayoutSlice.reducer,
 });
 
 export default rootReducer;

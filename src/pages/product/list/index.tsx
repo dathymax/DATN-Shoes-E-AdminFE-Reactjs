@@ -69,6 +69,7 @@ const ProductListPage = () => {
 
     return (
         <CustomTable
+            typeAdd="link"
             tableTitle="Product list"
             addBtnTitle="Add product"
             linkTo="/products/update-product"

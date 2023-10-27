@@ -15,11 +15,12 @@ const ManageTransactionPage = () => {
             .then((response) => {
                 dispatch(setAllTransaction(response?.data));
             })
-            .catch(() => { });
+            .catch(() => {});
     }, []);
 
     return (
         <CustomTable
+            typeAdd="noAdd"
             tableTitle="Transaction list"
             linkTo={"/transaction/manage-transaction"}
             columns={columns}

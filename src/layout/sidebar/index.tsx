@@ -3,6 +3,7 @@ import { Layout, Menu } from "antd";
 import Logo from "../../assets/images/Logo.png";
 import { BiHomeAlt2 } from "react-icons/bi";
 import { BsBoxSeam } from "react-icons/bs";
+import { MdOutlineDiscount } from "react-icons/md";
 import { PiReceiptLight, PiUsers } from "react-icons/pi";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -62,6 +63,14 @@ const AdminSidebar = () => {
                     },
                 },
             ],
+        },
+        {
+            label: "Promo codes",
+            key: "/promo-code",
+            icon: <MdOutlineDiscount style={{ fontSize: 18 }} />,
+            style: {
+                paddingLeft: "12px",
+            },
         },
         {
             label: "Customers",

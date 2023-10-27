@@ -4,13 +4,16 @@ import { ICategory, IProduct, IUser } from "../../../types";
 import Title from "../../../components/title";
 import { Button } from "antd";
 import { FiPlus } from "react-icons/fi";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { useAppDispatch } from "../../../store/store";
+import { setOpenDrawer } from "../../../store/features/layout";
 
 interface CustomTableProps extends TableProps<IUser | IProduct | ICategory> {
     tableTitle?: string | React.ReactNode;
     addBtnTitle?: string | React.ReactNode;
     addBtnLink?: string;
     linkTo?: string;
+    typeAdd: "link" | "drawer" | "noAdd";
 }
 
 const CustomTable: FC<CustomTableProps> = ({
@@ -20,23 +23,87 @@ const CustomTable: FC<CustomTableProps> = ({
     addBtnLink,
     dataSource,
     linkTo,
+    typeAdd,
     ...rest
 }) => {
     const navigate = useNavigate();
+    const dispatch = useAppDispatch();
+    const [searchParams] = useSearchParams();
+
+    const checkActionBtn = (_id?: string) => {
+        switch (typeAdd) {
+            case "link":
+                return (
+                    <Link
+                        to={`${linkTo}/${_id}`}
+                        className="text-primary font-bold"
+                    >
+                        Detail
+                    </Link>
+                );
+            case "drawer":
+                return (
+                    <p
+                        className="text-primary font-bold cursor-pointer"
+                        onClick={() => {
+                            dispatch(setOpenDrawer());
+                            if (_id) {
+                                searchParams.set("id", _id);
+                                navigate(`?${searchParams.toString()}`);
+                            }
+                        }}
+                    >
+                        Detail
+                    </p>
+                );
+            default:
+                break;
+        }
+    };
 
     const mapData = () => {
         return dataSource?.map((item) => ({
             ...item,
             key: item?._id,
-            action: (
-                <Link
-                    to={`${linkTo}/${item._id}`}
-                    className="text-primary font-bold"
-                >
-                    Detail
-                </Link>
-            ),
+            action: checkActionBtn(item?._id),
         }));
+    };
+
+    const checkTypeBtnAdd = () => {
+        switch (typeAdd) {
+            case "link":
+                return (
+                    <Button
+                        size="large"
+                        type="primary"
+                        className="flex items-center justify-center gap-2"
+                        onClick={() => {
+                            if (addBtnLink) {
+                                navigate(addBtnLink);
+                            }
+                        }}
+                    >
+                        <FiPlus className="text-[20px]" />
+                        {addBtnTitle}
+                    </Button>
+                );
+            case "drawer":
+                return (
+                    <Button
+                        size="large"
+                        type="primary"
+                        className="flex items-center justify-center gap-2"
+                        onClick={() => dispatch(setOpenDrawer())}
+                    >
+                        <FiPlus className="text-[20px]" />
+                        {addBtnTitle}
+                    </Button>
+                );
+            case "noAdd":
+                return <></>;
+            default:
+                break;
+        }
     };
 
     return (
@@ -45,19 +112,7 @@ const CustomTable: FC<CustomTableProps> = ({
                 <Title title={tableTitle} />
 
                 <div className="flex items-center justify-center gap-3">
-                    {addBtnLink ? (
-                        <Button
-                            size="large"
-                            type="primary"
-                            className="flex items-center justify-center gap-2"
-                            onClick={() => navigate(addBtnLink)}
-                        >
-                            <FiPlus className="text-[20px]" />
-                            {addBtnTitle}
-                        </Button>
-                    ) : (
-                        <></>
-                    )}
+                    {checkTypeBtnAdd()}
                 </div>
             </div>
             <Table

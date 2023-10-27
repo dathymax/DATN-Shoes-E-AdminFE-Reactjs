@@ -15,11 +15,12 @@ const ManageReturnsPage = () => {
             .then((response) => {
                 dispatch(setAllReturns(response?.data));
             })
-            .catch(() => { });
+            .catch(() => {});
     }, []);
 
     return (
         <CustomTable
+            typeAdd="noAdd"
             tableTitle="Returns list"
             linkTo="/transaction/manage-returns"
             columns={columns}

@@ -96,6 +96,14 @@ export interface ITransaction {
     subTotal?: string | number;
 }
 
-export interface IReturns {
+export interface IReturns {}
 
+export interface IPromoCode {
+    id?: string;
+    _id?: string;
+    name: string;
+    spendTime?: number;
+    isExpired?: boolean;
+    createDate?: Date;
+    modifiedDate?: Date;
 }
