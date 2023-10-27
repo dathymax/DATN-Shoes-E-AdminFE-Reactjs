@@ -4,6 +4,7 @@ import { UserApis } from "../../../apis/user";
 import { IUser } from "../../../types";
 import { useAppContext } from "../../../contexts/AppContext";
 import ViewDetailBuyer from "./components/Detail";
+import PromoCodes from "./components/PromoCodes";
 
 const CustomerViewDetailPage = () => {
     const { id } = useParams();
@@ -25,9 +26,10 @@ const CustomerViewDetailPage = () => {
     }, [id]);
 
     return (
-        <>
+        <div className="bg-white px-5 py-4 rounded-lg">
             <ViewDetailBuyer user={user} />
-        </>
+            <PromoCodes user={user} />
+        </div>
     );
 };
 

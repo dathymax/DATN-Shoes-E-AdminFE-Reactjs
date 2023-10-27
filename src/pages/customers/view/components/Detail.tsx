@@ -9,7 +9,7 @@ interface ViewDetailBuyerProps {
 
 const ViewDetailBuyer: FC<ViewDetailBuyerProps> = ({ user }) => {
     return (
-        <div className="bg-white px-5 py-4 rounded-lg">
+        <>
             <div className="flex items-center justify-between mb-5">
                 <Title title="Detail buyer" />
             </div>
@@ -45,7 +45,7 @@ const ViewDetailBuyer: FC<ViewDetailBuyerProps> = ({ user }) => {
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 };
 

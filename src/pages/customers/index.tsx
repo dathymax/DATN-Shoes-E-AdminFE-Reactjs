@@ -34,7 +34,8 @@ const CustomersPage = () => {
 
     return (
         <CustomTable
-            typeAdd="noAdd"
+            typeAdd="link"
+            noAdd
             tableTitle={"Customers"}
             columns={columns}
             linkTo={"/customers"}

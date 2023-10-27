@@ -17,6 +17,7 @@ export interface IUser {
     city?: string;
     avatar?: string;
     updatedAt?: Date | string;
+    promoCodes?: IPromoCode[];
 }
 
 export interface IProduct {

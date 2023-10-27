@@ -14,6 +14,7 @@ interface CustomTableProps extends TableProps<IUser | IProduct | ICategory> {
     addBtnLink?: string;
     linkTo?: string;
     typeAdd: "link" | "drawer" | "noAdd";
+    noAdd?: boolean;
 }
 
 const CustomTable: FC<CustomTableProps> = ({
@@ -24,6 +25,7 @@ const CustomTable: FC<CustomTableProps> = ({
     dataSource,
     linkTo,
     typeAdd,
+    noAdd,
     ...rest
 }) => {
     const navigate = useNavigate();
@@ -112,7 +114,7 @@ const CustomTable: FC<CustomTableProps> = ({
                 <Title title={tableTitle} />
 
                 <div className="flex items-center justify-center gap-3">
-                    {checkTypeBtnAdd()}
+                    {noAdd ? <></> : checkTypeBtnAdd()}
                 </div>
             </div>
             <Table
