@@ -6,6 +6,7 @@ import TransactionDetail from './components/TransactionDetail';
 import PurchasedProduct from './components/PurchasedProduct';
 import Shipping from '../components/Shipping';
 import { TransactionApis } from '../../../apis/transaction';
+import dayjs from 'dayjs';
 
 const TransactionViewPage = () => {
     const { id } = useParams();
@@ -14,7 +15,10 @@ const TransactionViewPage = () => {
 
     useEffect(() => {
         getById(id).then(response => {
-            form.setFieldsValue(response?.data)
+            form.setFieldsValue({
+                ...response?.data,
+                date: dayjs(response?.data?.date),
+            })
         }).catch(() => { })
     }, [id])
 
