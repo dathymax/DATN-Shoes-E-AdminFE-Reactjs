@@ -12,15 +12,15 @@ export const PromoCodeApis = {
         const response = await Axios_instance.get(`${url}/${id}`);
         return response?.data || {};
     },
-    create: async function (values?: IPromoCode) {
+    createPromoCode: async function (values?: IPromoCode) {
         const response = await Axios_instance.post(url, values);
         return response?.data || {};
     },
-    update: async function (id?: string, values?: IPromoCode) {
+    updateById: async function (id?: string, values?: IPromoCode) {
         const response = await Axios_instance.patch(`${url}/${id}`, values);
         return response?.data || {};
     },
-    delete: async function (id?: string) {
+    deleteById: async function (id?: string) {
         const response = await Axios_instance.delete(`${url}/${id}`);
         return response?.data || {};
     },

@@ -4,7 +4,7 @@ import { columns } from "./constants";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import { PromoCodeApis } from "../../apis/promo-code";
 import { setAllPromoCode } from "../../store/features/promo-code";
-import { Drawer } from "antd";
+import { Drawer, message } from "antd";
 import PromoCodeAdd from "./services/add";
 import { setCloseDrawer } from "../../store/features/layout";
 import dayjs from "dayjs";
@@ -12,7 +12,7 @@ import { IPromoCode } from "../../types";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 const PromoCodePage = () => {
-    const { getAll } = PromoCodeApis;
+    const { getAll, deleteById } = PromoCodeApis;
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const [searchParams] = useSearchParams();
@@ -37,12 +37,23 @@ const PromoCodePage = () => {
             .then((response) => {
                 dispatch(setAllPromoCode(response?.data));
             })
-            .catch(() => {});
+            .catch(() => { });
     };
 
     useEffect(() => {
         getData();
     }, []);
+
+    const handleDelete = (id?: string) => {
+        deleteById(id).then(() => {
+            message.success("Delete promo code success!");
+            getData();
+        }).catch((error) => {
+            const { response } = error;
+
+            message.error(response?.data?.message);
+        })
+    }
 
     return (
         <>
@@ -53,6 +64,7 @@ const PromoCodePage = () => {
                 columns={columns}
                 linkTo={"/promo-code"}
                 dataSource={mapData(items)}
+                onDelete={handleDelete}
             />
 
             <Drawer

@@ -4,6 +4,7 @@ import { UserApis } from "../../apis/user";
 import { useAppContext } from "../../contexts/AppContext";
 import CustomTable from "../../custom/data-display/table";
 import { columns } from "./constants/columns";
+import { message } from "antd";
 
 const CustomersPage = () => {
     const { openNotiError } = useAppContext();
@@ -21,7 +22,7 @@ const CustomersPage = () => {
         });
     };
 
-    useEffect(() => {
+    const getData = () => {
         UserApis.getAllUsers()
             .then((response) => {
                 setDataSource(response?.data);
@@ -30,7 +31,21 @@ const CustomersPage = () => {
                 const { response } = error;
                 openNotiError("Get users", response?.data?.message);
             });
+    }
+
+    useEffect(() => {
+        getData();
     }, []);
+
+    const handleDelete = (id?: string) => {
+        UserApis.deleteUser(id).then(() => {
+            message.success("Delete user success!");
+        }).catch((error) => {
+            const { response } = error;
+
+            message.error(response?.data?.message);
+        })
+    }
 
     return (
         <CustomTable
@@ -40,6 +55,7 @@ const CustomersPage = () => {
             columns={columns}
             linkTo={"/customers"}
             dataSource={mapData(dataSource)}
+            onDelete={handleDelete}
         />
     );
 };

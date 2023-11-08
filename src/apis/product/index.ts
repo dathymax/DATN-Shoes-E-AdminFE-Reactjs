@@ -20,4 +20,8 @@ export const ProductApis = {
         const response = await Axios_instance.patch(`${url}/${id}`, values);
         return response?.data || {};
     },
+    deleteProduct: async (id?: string) => {
+        const response = await Axios_instance.delete(`${url}/${id}`);
+        return response?.data || {};
+    }
 };

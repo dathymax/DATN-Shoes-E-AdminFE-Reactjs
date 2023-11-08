@@ -16,11 +16,11 @@ export const TransactionApis = {
         const response = await Axios_instance.get(`${url}/${id}`);
         return response?.data || {};
     },
-    create: async function (values?: ITransaction) {
+    createTransaction: async function (values?: ITransaction) {
         const response = await Axios_instance.post(url, values);
         return response?.data || {};
     },
-    update: async function (
+    updateTransaction: async function (
         id?: string,
         transactionExt?: string,
         values?: ITransaction
@@ -31,9 +31,9 @@ export const TransactionApis = {
         );
         return response?.data || {};
     },
-    delete: async function (id?: string, transactionExt?: string) {
+    deleteTransaction: async function (id?: string, extCode?: string) {
         const response = await Axios_instance.delete(
-            `${url}/${id}/${transactionExt}`
+            `${url}/${id}/${extCode}`
         );
         return response?.data || {};
     },

@@ -6,10 +6,11 @@ import { columns } from "./constant/columns";
 import { setAllTransaction } from "../../../store/features/transaction";
 import { formatStatusToTag } from "../../../helpers";
 import { ITransaction } from "../../../types";
+import { message } from "antd";
 
 const ManageTransactionPage = () => {
     const dispatch = useAppDispatch();
-    const { getAll } = TransactionApis;
+    const { getAll, deleteTransaction } = TransactionApis;
     const items = useAppSelector((state) => state.transaction.items);
 
     const mapData = (data: ITransaction[]) => {
@@ -18,17 +19,32 @@ const ManageTransactionPage = () => {
             purchasedProduct: item?.purchasedProducts?.[0]?.image && <img src={item?.purchasedProducts?.[0]?.image} alt="Product image" />,
             paymentAmount: `$${item?.subTotal}`,
             totalProduct: item?.purchasedProducts?.length,
-            status: formatStatusToTag(item?.status)
+            status: formatStatusToTag(item?.status),
         }))
     }
 
-    useEffect(() => {
+    const getData = () => {
         getAll()
             .then((response) => {
                 dispatch(setAllTransaction(response?.data));
             })
             .catch(() => { });
+    }
+
+    useEffect(() => {
+        getData();
     }, []);
+
+    const handleDelete = (id?: string, extCode?: string) => {
+        deleteTransaction(id, extCode).then(() => {
+            message.success("Delete transaction success!");
+            getData();
+        }).catch((error) => {
+            const { response } = error;
+
+            message.error(response?.data?.message);
+        })
+    }
 
     return (
         <CustomTable
@@ -38,6 +54,7 @@ const ManageTransactionPage = () => {
             linkTo={"/transaction/manage-transaction"}
             columns={columns}
             dataSource={mapData(items)}
+            onDelete={handleDelete}
         />
     );
 };

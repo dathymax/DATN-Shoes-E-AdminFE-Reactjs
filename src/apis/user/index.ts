@@ -16,4 +16,8 @@ export const UserApis = {
         const response = await Axios_instance.patch(`${url}/${id}`, values);
         return response?.data || {};
     },
+    deleteUser: async function (id?: string) {
+        const response = await Axios_instance.delete(`${url}/${id}`);
+        return response?.data || {};
+    },
 };

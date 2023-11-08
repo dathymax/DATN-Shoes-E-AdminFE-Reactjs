@@ -1,20 +1,22 @@
-import { Table, TableProps } from "antd";
+import { Modal, Table, TableProps } from "antd";
 import React, { FC } from "react";
-import { ICategory, IProduct, IUser } from "../../../types";
+import { ICategory, IProduct, ITransaction, IUser } from "../../../types";
 import Title from "../../../components/title";
 import { Button } from "antd";
 import { FiPlus } from "react-icons/fi";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useAppDispatch } from "../../../store/store";
 import { setOpenDrawer } from "../../../store/features/layout";
+import { ExclamationCircleOutlined } from '@ant-design/icons';
 
-interface CustomTableProps extends TableProps<IUser | IProduct | ICategory> {
+interface CustomTableProps extends TableProps<IUser | IProduct | ICategory | ITransaction> {
     tableTitle?: string | React.ReactNode;
     addBtnTitle?: string | React.ReactNode;
     addBtnLink?: string;
     linkTo?: string;
     typeAdd: "link" | "drawer" | "noAdd";
     noAdd?: boolean;
+    onDelete?: (id?: string, extCode?: string) => void
 }
 
 const CustomTable: FC<CustomTableProps> = ({
@@ -26,11 +28,27 @@ const CustomTable: FC<CustomTableProps> = ({
     linkTo,
     typeAdd,
     noAdd,
+    onDelete,
     ...rest
 }) => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const [searchParams] = useSearchParams();
+    const [modal, contextHolder] = Modal.useModal();
+
+    const confirm = (id?: string, extCode?: string) => {
+        modal.confirm({
+            title: 'Delete this item?',
+            icon: <ExclamationCircleOutlined />,
+            okText: 'Yes',
+            cancelText: 'Cancel',
+            onOk: () => {
+                if (onDelete) {
+                    onDelete(id, extCode)
+                }
+            }
+        });
+    };
 
     const checkActionBtn = (_id?: string) => {
         switch (typeAdd) {
@@ -67,7 +85,15 @@ const CustomTable: FC<CustomTableProps> = ({
         return dataSource?.map((item) => ({
             ...item,
             key: item?._id,
-            action: checkActionBtn(item?._id),
+            action: <div className="flex items-center gap-10">
+                {checkActionBtn(item?._id)}
+                <p
+                    className="text-red-500 font-bold cursor-pointer"
+                    onClick={() => confirm(item?._id, item?.extCode)}
+                >
+                    Delete
+                </p>
+            </div>,
         }));
     };
 
@@ -122,6 +148,7 @@ const CustomTable: FC<CustomTableProps> = ({
                     {
                         dataIndex: "action",
                         title: "ACTION",
+                        width: "13%"
                     },
                 ])}
                 dataSource={mapData()}
@@ -130,6 +157,8 @@ const CustomTable: FC<CustomTableProps> = ({
                 }}
                 {...rest}
             />
+
+            {contextHolder}
         </div>
     );
 };

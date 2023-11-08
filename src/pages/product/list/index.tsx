@@ -5,7 +5,7 @@ import { ProductApis } from "../../../apis/product";
 import { useAppDispatch, useAppSelector } from "../../../store/store";
 import { setAllProduct } from "../../../store/features/products";
 import { IProduct } from "../../../types";
-import { Tag } from "antd";
+import { Tag, message } from "antd";
 import { UPLOAD_URL } from "../../../constant";
 
 export const mapStatusToTag = (status: string | boolean | React.ReactNode) => {
@@ -29,7 +29,7 @@ export const mapStatusToTag = (status: string | boolean | React.ReactNode) => {
 
 const ProductListPage = () => {
     const dispatch = useAppDispatch();
-    const { getAllProducts } = ProductApis;
+    const { getAllProducts, deleteProduct } = ProductApis;
     const items = useAppSelector((state) => state.products.items);
 
     const mapData = (products: IProduct[]) => {
@@ -57,7 +57,7 @@ const ProductListPage = () => {
         });
     };
 
-    useEffect(() => {
+    const getData = () => {
         getAllProducts()
             .then((response) => {
                 dispatch(setAllProduct(response?.data));
@@ -65,7 +65,22 @@ const ProductListPage = () => {
             .catch(() => {
                 dispatch(setAllProduct([]));
             });
+    }
+
+    useEffect(() => {
+        getData()
     }, []);
+
+    const handleDelete = (id?: string) => {
+        deleteProduct(id).then(() => {
+            message.success("Delete product success!");
+            getData();
+        }).catch((error) => {
+            const { response } = error;
+
+            message.error(response?.data?.message);
+        })
+    }
 
     return (
         <CustomTable
@@ -76,6 +91,7 @@ const ProductListPage = () => {
             addBtnLink="/products/add-product"
             columns={columns}
             dataSource={mapData(items)}
+            onDelete={handleDelete}
         />
     );
 };

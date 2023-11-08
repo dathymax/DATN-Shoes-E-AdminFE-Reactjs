@@ -6,6 +6,7 @@ import { ICategory } from "../../../types";
 import { mapStatusToTag } from "../list";
 import { useAppDispatch, useAppSelector } from "../../../store/store";
 import { setAllCategory } from "../../../store/features/category";
+import { message } from "antd";
 
 const ProductCategoriesPage = () => {
     const dispatch = useAppDispatch();
@@ -23,7 +24,7 @@ const ProductCategoriesPage = () => {
         });
     };
 
-    useEffect(() => {
+    const getData = () => {
         CategoryApis.getAllCategories()
             .then((response) => {
                 dispatch(setAllCategory(response?.data));
@@ -31,7 +32,22 @@ const ProductCategoriesPage = () => {
             .catch(() => {
                 dispatch(setAllCategory([]));
             });
+    }
+
+    useEffect(() => {
+        getData();
     }, []);
+
+    const handleDelete = (id?: string) => {
+        CategoryApis.deleteCategoryById(id).then(() => {
+            message.success("Delete category success!");
+            getData();
+        }).catch((error) => {
+            const { response } = error;
+
+            message.error(response?.data?.message);
+        })
+    }
 
     return (
         <CustomTable
@@ -42,6 +58,7 @@ const ProductCategoriesPage = () => {
             addBtnLink="/products/add-category"
             columns={columns}
             dataSource={mapData(categories)}
+            onDelete={handleDelete}
         />
     );
 };
