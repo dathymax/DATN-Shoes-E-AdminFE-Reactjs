@@ -1,7 +1,5 @@
-import React from "react";
 import { Avatar, Dropdown, Layout } from "antd";
 import InputSearch from "../../custom/data-entry/input/InputSearch";
-import { PiBellSimpleBold } from "react-icons/pi";
 import { BsChevronDown } from "react-icons/bs";
 import { AiOutlineUser } from "react-icons/ai";
 import { logout } from "../../apis/auth";
@@ -51,10 +49,6 @@ const AdminHeader = () => {
             <InputSearch />
 
             <div className="user-action flex items-center gap-5">
-                {/* <PiBellSimpleBold className="text-gray-500 text-[25px] cursor-pointer" />
-
-                <div className="h-[30px] w-[2px] bg-gray-300"></div> */}
-
                 <Dropdown
                     menu={{
                         items,

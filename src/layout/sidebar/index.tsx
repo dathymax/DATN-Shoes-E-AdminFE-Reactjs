@@ -1,7 +1,5 @@
-import React from "react";
 import { Layout, Menu } from "antd";
 import Logo from "../../assets/images/Logo.png";
-import { BiHomeAlt2 } from "react-icons/bi";
 import { BsBoxSeam } from "react-icons/bs";
 import { MdOutlineDiscount } from "react-icons/md";
 import { PiReceiptLight, PiUsers } from "react-icons/pi";
@@ -14,14 +12,6 @@ const AdminSidebar = () => {
     const { pathname } = useLocation();
 
     const menuItems = [
-        // {
-        //     label: "Dashboard",
-        //     key: "/dashboard",
-        //     icon: <BiHomeAlt2 style={{ fontSize: 18 }} />,
-        //     style: {
-        //         paddingLeft: "12px",
-        //     },
-        // },
         {
             label: "Products",
             key: "/products",

@@ -1,5 +1,5 @@
 import { Button, Divider, Modal } from "antd";
-import React, { useState } from "react";
+import { useState } from "react";
 import UpdatePassword from "./UpdatePassword";
 import Title from "../../../components/title";
 import { useAppSelector } from "../../../store/store";

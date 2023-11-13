@@ -1,4 +1,3 @@
-import React from 'react'
 import Title from '../../../components/title'
 import { Divider } from 'antd'
 import FormWrapper from '../../../components/form/FormWrapper'

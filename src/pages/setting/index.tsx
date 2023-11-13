@@ -1,4 +1,3 @@
-import React from 'react'
 import SettingPageProfile from './components/Profile'
 import SettingPageAccount from './components/Account'
 

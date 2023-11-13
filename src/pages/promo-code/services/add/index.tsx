@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import CustomForm from "../../../../custom/data-entry/form";
 import { Button, Form, Input, InputNumber } from "antd";
 import { IPromoCode } from "../../../../types";
@@ -13,7 +13,7 @@ const PromoCodeAdd = () => {
     const dispatch = useAppDispatch();
     const [searchParams] = useSearchParams();
     const id = searchParams.get("id") || "";
-    const { getById, create, update } = PromoCodeApis;
+    const { getById, createPromoCode, updateById } = PromoCodeApis;
     const { openNotiSuccess, openNotiError } = useAppContext();
 
     useEffect(() => {
@@ -22,13 +22,13 @@ const PromoCodeAdd = () => {
                 .then((response) => {
                     form.setFieldsValue(response?.data);
                 })
-                .catch(() => {});
+                .catch(() => { });
         }
     }, [id]);
 
     const onFinish = (values?: IPromoCode) => {
         if (!id) {
-            create(values)
+            createPromoCode(values)
                 .then(() => {
                     openNotiSuccess("Create");
                     dispatch(setCloseDrawer());
@@ -39,7 +39,7 @@ const PromoCodeAdd = () => {
                     openNotiError("Create", response?.message);
                 });
         } else {
-            update(id, values)
+            updateById(id, values)
                 .then(() => {
                     openNotiSuccess("Update");
                     dispatch(setCloseDrawer());

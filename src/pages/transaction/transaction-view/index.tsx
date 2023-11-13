@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import CustomForm from '../../../custom/data-entry/form';
 import { Form } from 'antd';

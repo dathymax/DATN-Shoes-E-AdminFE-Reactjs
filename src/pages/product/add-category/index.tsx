@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { Button, Form } from "antd";
 import { ICategory } from "../../../types";
 import { useNavigate, useParams } from "react-router-dom";

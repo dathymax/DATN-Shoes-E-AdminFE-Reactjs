@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import CustomForm from "../../../../custom/data-entry/form";
 import { UserApis } from "../../../../apis/user";
 import { IUser } from "../../../../types";
@@ -26,7 +26,7 @@ const PromoCodes: FC<PromoCodesProps> = ({ user }) => {
                     }))
                 );
             })
-            .catch(() => {});
+            .catch(() => { });
     }, []);
 
     useEffect(() => {
@@ -37,8 +37,8 @@ const PromoCodes: FC<PromoCodesProps> = ({ user }) => {
 
     const onFinish = (values?: IUser) => {
         updateUser(user?._id, values)
-            .then(() => {})
-            .catch(() => {});
+            .then(() => { })
+            .catch(() => { });
     };
 
     return (

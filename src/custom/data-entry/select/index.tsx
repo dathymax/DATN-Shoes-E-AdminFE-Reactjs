@@ -1,7 +1,7 @@
 import { Select, SelectProps } from "antd";
-import React, { FC } from "react";
+import { FC } from "react";
 
-interface CustomSelectProps extends SelectProps {}
+interface CustomSelectProps extends SelectProps { }
 
 const CustomSelect: FC<CustomSelectProps> = ({ ...rest }) => {
     return <Select size={rest.size || "large"} {...rest} allowClear />;

@@ -1,4 +1,3 @@
-import React from 'react'
 import Title from '../../../../components/title'
 import { Divider } from 'antd'
 import Purchased from '../../components/Purchased'

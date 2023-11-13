@@ -1,17 +1,15 @@
-import React from "react";
 import Banner from "../../assets/images/BannerLogin.png";
 import Logo from "../../assets/images/Logo.png";
 import { Button, Checkbox, Form, Input, Spin } from "antd";
 import { IUser } from "../../types";
 import { login } from "../../apis/auth";
 import { useAppContext } from "../../contexts/AppContext";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import { setUserInfo } from "../../store/features/auth";
 
 const AuthPage = () => {
-    const navigate = useNavigate();
     const { loading, setLoading, openNotiSuccess, openNotiError } =
         useAppContext();
     const dispatch = useAppDispatch();

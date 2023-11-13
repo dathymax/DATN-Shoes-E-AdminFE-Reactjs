@@ -1,5 +1,4 @@
 import { Divider, Table } from 'antd'
-import React from 'react'
 import Title from '../../../../components/title'
 
 const columns = [

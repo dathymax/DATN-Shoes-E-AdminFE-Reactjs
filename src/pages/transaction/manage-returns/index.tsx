@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import CustomTable from "../../../custom/data-display/table";
 import { useAppDispatch, useAppSelector } from "../../../store/store";
 import { columns } from "./constant/columns";
@@ -15,7 +15,7 @@ const ManageReturnsPage = () => {
             .then((response) => {
                 dispatch(setAllReturns(response?.data));
             })
-            .catch(() => {});
+            .catch(() => { });
     }, []);
 
     return (

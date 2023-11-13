@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { IUser } from "../../../../types";
 import Title from "../../../../components/title";
 import { genUploadUrl } from "../../../../helpers";

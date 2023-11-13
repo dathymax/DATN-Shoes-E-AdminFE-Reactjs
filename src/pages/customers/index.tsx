@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { IUser } from "../../types";
 import { UserApis } from "../../apis/user";
 import { useAppContext } from "../../contexts/AppContext";

@@ -1,5 +1,5 @@
 import { Button, Form, Input } from "antd";
-import React, { FC } from "react";
+import { FC } from "react";
 import { IPasswordReset } from "../../../types";
 import { updatePassword } from "../../../apis/auth";
 import { useParams } from "react-router-dom";

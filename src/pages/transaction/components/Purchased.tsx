@@ -1,4 +1,3 @@
-import React from 'react'
 import FormWrapper from '../../../components/form/FormWrapper'
 import CustomInput from '../../../custom/data-entry/input/Input'
 import CustomDatePicker from '../../../custom/data-entry/date-picker/DatePicker'

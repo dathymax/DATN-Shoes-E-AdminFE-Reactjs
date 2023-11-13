@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { Button, Form } from "antd";
 import { IProduct } from "../../../types";
 import ProductAddInformation from "./components/Information";

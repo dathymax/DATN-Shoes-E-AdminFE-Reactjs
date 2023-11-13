@@ -1,7 +1,7 @@
 import { InputNumber, InputNumberProps } from "antd";
-import React, { FC } from "react";
+import { FC } from "react";
 
-interface CustomInputNumberProps extends InputNumberProps {}
+interface CustomInputNumberProps extends InputNumberProps { }
 
 const CustomInputNumber: FC<CustomInputNumberProps> = ({ ...rest }) => {
     return (

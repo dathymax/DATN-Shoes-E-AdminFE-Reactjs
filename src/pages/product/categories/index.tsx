@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import CustomTable from "../../../custom/data-display/table";
 import { columns } from "./constants/columns";
 import { CategoryApis } from "../../../apis/category";

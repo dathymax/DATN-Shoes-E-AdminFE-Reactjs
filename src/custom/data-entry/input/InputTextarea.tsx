@@ -1,8 +1,8 @@
 import { Input } from "antd";
 import { TextAreaProps } from "antd/es/input";
-import React, { FC } from "react";
+import { FC } from "react";
 
-interface CustomInputTextareaProps extends TextAreaProps {}
+interface CustomInputTextareaProps extends TextAreaProps { }
 
 const CustomInputTextarea: FC<CustomInputTextareaProps> = ({ ...rest }) => {
     return (

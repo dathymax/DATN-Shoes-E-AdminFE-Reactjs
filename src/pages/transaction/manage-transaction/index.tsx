@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../../store/store";
 import { TransactionApis } from "../../../apis/transaction";
 import CustomTable from "../../../custom/data-display/table";
