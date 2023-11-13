@@ -31,6 +31,16 @@ export const TransactionApis = {
         );
         return response?.data || {};
     },
+    updateTransactionById: async function (
+        id?: string,
+        values?: ITransaction
+    ) {
+        const response = await Axios_instance.patch(
+            `${url}/${id}`,
+            values
+        );
+        return response?.data || {};
+    },
     deleteTransaction: async function (id?: string, extCode?: string) {
         const response = await Axios_instance.delete(
             `${url}/${id}/${extCode}`
