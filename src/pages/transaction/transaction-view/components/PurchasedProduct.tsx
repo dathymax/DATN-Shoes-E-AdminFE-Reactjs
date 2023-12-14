@@ -1,5 +1,5 @@
-import { Divider, Table } from 'antd'
-import Title from '../../../../components/title'
+import { Divider, Table } from "antd";
+import Title from "../../../../components/title";
 
 const columns = [
     {
@@ -8,7 +8,7 @@ const columns = [
     },
     {
         dataIndex: "sku",
-        title: "SKU"
+        title: "SKU",
     },
     {
         dataIndex: "size",
@@ -20,7 +20,7 @@ const columns = [
     },
     {
         dataIndex: "quantity",
-        title: "QTY"
+        title: "QTY",
     },
     {
         dataIndex: "price",
@@ -28,19 +28,19 @@ const columns = [
     },
     {
         dataIndex: "total",
-        title: "TOTAL"
+        title: "TOTAL",
     },
-]
+];
 
 const PurchasedProduct = () => {
     return (
         <div className="bg-white rounded-lg p-5 mt-5">
-            <Title title="Product Product" />
+            <Title title="Purchased Product" />
             <Divider />
 
             <Table columns={columns} />
         </div>
-    )
-}
+    );
+};
 
-export default PurchasedProduct
+export default PurchasedProduct;

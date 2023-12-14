@@ -46,22 +46,14 @@ export function genUploadUrl(fileName?: string) {
 export const formatStatusToTag = (status?: string) => {
     switch (status) {
         case "process":
-            return (
-                <Tag color="gold">Process</Tag>
-            )
+            return <Tag color="gold">Process</Tag>;
         case "delivering":
-            return (
-                <Tag color="blue">Delivering</Tag>
-            )
+            return <Tag color="blue">Delivering</Tag>;
         case "failed":
-            return (
-                <Tag color="red">Failed</Tag>
-            )
-        case "arrived":
-            return (
-                <Tag color="green">Arrived</Tag>
-            )
+            return <Tag color="red">Failed</Tag>;
+        case "packed":
+            return <Tag color="green">Packed</Tag>;
         default:
             break;
     }
-}
+};
