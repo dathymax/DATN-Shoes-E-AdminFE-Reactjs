@@ -50,6 +50,7 @@ const PurchasedProduct: FC<PurchasedProductProps> = ({ products }) => {
                     <img
                         src={`${UPLOAD_URL}/${item?.image}`}
                         alt="Product image"
+                        className="w-[100px] h-[100px] rounded-lg"
                     />
                 ),
             };

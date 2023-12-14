@@ -21,6 +21,7 @@ const ManageTransactionPage = () => {
                 <img
                     src={`${UPLOAD_URL}/${item?.purchasedProducts?.[0]?.image}`}
                     alt="Product image"
+                    className="w-[100px] h-[100px] rounded-lg"
                 />
             ),
             paymentAmount: `$${item?.subTotal}`,
