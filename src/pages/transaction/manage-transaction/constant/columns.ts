@@ -8,10 +8,6 @@ export const columns = [
         title: "CUSTOMER NAME",
     },
     {
-        dataIndex: "purchasedProduct",
-        title: "PURCHASED PRODUCT",
-    },
-    {
         dataIndex: "totalProduct",
         title: "TOTAL PRODUCT",
     },

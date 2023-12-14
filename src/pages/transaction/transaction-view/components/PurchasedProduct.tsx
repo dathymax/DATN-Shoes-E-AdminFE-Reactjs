@@ -1,5 +1,8 @@
 import { Divider, Table } from "antd";
 import Title from "../../../../components/title";
+import { IPurchasedProduct } from "../../../../types";
+import { FC } from "react";
+import { UPLOAD_URL } from "../../../../constant";
 
 const columns = [
     {
@@ -32,13 +35,33 @@ const columns = [
     },
 ];
 
-const PurchasedProduct = () => {
+interface PurchasedProductProps {
+    products?: IPurchasedProduct[];
+}
+
+const PurchasedProduct: FC<PurchasedProductProps> = ({ products }) => {
+    const mapData = (data?: IPurchasedProduct[]) => {
+        if (!data || data?.length === 0) return [];
+
+        return data?.map((item) => {
+            return {
+                ...item,
+                product: (
+                    <img
+                        src={`${UPLOAD_URL}/${item?.image}`}
+                        alt="Product image"
+                    />
+                ),
+            };
+        });
+    };
+
     return (
         <div className="bg-white rounded-lg p-5 mt-5">
             <Title title="Purchased Product" />
             <Divider />
 
-            <Table columns={columns} />
+            <Table columns={columns} dataSource={mapData(products)} />
         </div>
     );
 };

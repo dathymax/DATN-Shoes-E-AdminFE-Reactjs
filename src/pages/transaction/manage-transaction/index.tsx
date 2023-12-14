@@ -7,6 +7,7 @@ import { setAllTransaction } from "../../../store/features/transaction";
 import { formatStatusToTag } from "../../../helpers";
 import { ITransaction } from "../../../types";
 import { message } from "antd";
+import { UPLOAD_URL } from "../../../constant";
 
 const ManageTransactionPage = () => {
     const dispatch = useAppDispatch();
@@ -14,37 +15,44 @@ const ManageTransactionPage = () => {
     const items = useAppSelector((state) => state.transaction.items);
 
     const mapData = (data: ITransaction[]) => {
-        return data?.map(item => ({
+        return data?.map((item) => ({
             ...item,
-            purchasedProduct: item?.purchasedProducts?.[0]?.image && <img src={item?.purchasedProducts?.[0]?.image} alt="Product image" />,
+            purchasedProduct: item?.purchasedProducts?.[0]?.image && (
+                <img
+                    src={`${UPLOAD_URL}/${item?.purchasedProducts?.[0]?.image}`}
+                    alt="Product image"
+                />
+            ),
             paymentAmount: `$${item?.subTotal}`,
             totalProduct: item?.purchasedProducts?.length,
             status: formatStatusToTag(item?.status),
-        }))
-    }
+        }));
+    };
 
     const getData = () => {
         getAll()
             .then((response) => {
                 dispatch(setAllTransaction(response?.data));
             })
-            .catch(() => { });
-    }
+            .catch(() => {});
+    };
 
     useEffect(() => {
         getData();
     }, []);
 
     const handleDelete = (id?: string, extCode?: string) => {
-        deleteTransaction(id, extCode).then(() => {
-            message.success("Delete transaction success!");
-            getData();
-        }).catch((error) => {
-            const { response } = error;
+        deleteTransaction(id, extCode)
+            .then(() => {
+                message.success("Delete transaction success!");
+                getData();
+            })
+            .catch((error) => {
+                const { response } = error;
 
-            message.error(response?.data?.message);
-        })
-    }
+                message.error(response?.data?.message);
+            });
+    };
 
     return (
         <CustomTable

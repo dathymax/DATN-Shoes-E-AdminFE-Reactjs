@@ -10,7 +10,7 @@ import {
 } from "../../store/features/file";
 import { UPLOAD_URL } from "../../constant";
 import "./index.css";
-import { AiOutlineDelete, AiOutlineEye } from "react-icons/ai";
+import { AiOutlineDelete } from "react-icons/ai";
 
 interface UploadProps {
     fileId?: string;

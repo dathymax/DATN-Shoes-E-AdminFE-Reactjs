@@ -60,7 +60,7 @@ const TransactionViewPage = () => {
 
                 <Shipping />
 
-                <PurchasedProduct />
+                <PurchasedProduct products={transaction?.purchasedProducts} />
             </CustomForm>
         </>
     );
