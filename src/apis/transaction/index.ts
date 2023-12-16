@@ -8,6 +8,10 @@ export const TransactionApis = {
         const response = await Axios_instance.get(url);
         return response?.data || [];
     },
+    getAllInstance: async function () {
+        const response = await Axios_instance.get(`${url}-instance`);
+        return response?.data || [];
+    },
     getAllReturnsTransaction: async function () {
         const response = await Axios_instance.get(`${url}/returns`);
         return response?.data || [];
@@ -31,20 +35,12 @@ export const TransactionApis = {
         );
         return response?.data || {};
     },
-    updateTransactionById: async function (
-        id?: string,
-        values?: ITransaction
-    ) {
-        const response = await Axios_instance.patch(
-            `${url}/${id}`,
-            values
-        );
+    updateTransactionById: async function (id?: string, values?: ITransaction) {
+        const response = await Axios_instance.patch(`${url}/${id}`, values);
         return response?.data || {};
     },
     deleteTransaction: async function (id?: string, extCode?: string) {
-        const response = await Axios_instance.delete(
-            `${url}/${id}/${extCode}`
-        );
+        const response = await Axios_instance.delete(`${url}/${id}/${extCode}`);
         return response?.data || {};
     },
 };

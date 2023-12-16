@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { TransactionApis } from "../../apis/transaction";
 import { UserApis } from "../../apis/user";
 import { ProductApis } from "../../apis/product";
-import { IProduct, ITransaction } from "../../types";
+import { IProduct, IPurchasedProduct, ITransaction } from "../../types";
 
 const DashboardPage = () => {
     const [products, setProducts] = useState(
@@ -16,14 +16,24 @@ const DashboardPage = () => {
     const [totalUsers, setTotalUsers] = useState(0);
 
     useEffect(() => {
-        TransactionApis.getAll()
+        TransactionApis.getAllInstance()
             .then((response) => {
                 setTotalSales({
                     data: response?.data,
                     total: response?.data?.reduce(
                         (prev: number, item: ITransaction) =>
                             Number(prev) +
-                            Number(item?.purchasedProducts?.length),
+                            Number(
+                                item?.purchasedProducts?.reduce(
+                                    (
+                                        prevProduct: number,
+                                        currProduct: IPurchasedProduct
+                                    ) =>
+                                        Number(prevProduct) +
+                                        Number(currProduct.quantity),
+                                    0
+                                )
+                            ),
                         0
                     ),
                 });

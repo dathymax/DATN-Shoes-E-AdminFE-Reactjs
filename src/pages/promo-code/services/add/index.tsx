@@ -22,11 +22,16 @@ const PromoCodeAdd = () => {
                 .then((response) => {
                     form.setFieldsValue(response?.data);
                 })
-                .catch(() => { });
+                .catch(() => {});
         }
     }, [id]);
 
-    const onFinish = (values?: IPromoCode) => {
+    const onFinish = (values: IPromoCode) => {
+        values = {
+            ...values,
+            spendTime: 10,
+        };
+
         if (!id) {
             createPromoCode(values)
                 .then(() => {
@@ -68,16 +73,16 @@ const PromoCodeAdd = () => {
             </Form.Item>
 
             <Form.Item
-                name={"spendTime"}
-                label="Spend time"
+                name={"discount"}
+                label="Discount"
                 rules={[
                     {
                         required: true,
-                        message: "Please type spend time",
+                        message: "Please type discount",
                     },
                 ]}
             >
-                <InputNumber className="w-full" placeholder="Type spend time" />
+                <InputNumber className="w-full" placeholder="Type discount" />
             </Form.Item>
 
             <Button type="primary" htmlType="submit" size="large">

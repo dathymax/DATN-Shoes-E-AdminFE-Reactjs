@@ -5,7 +5,7 @@ import CustomTable from "../../../custom/data-display/table";
 import { columns } from "./constant/columns";
 import { setAllTransaction } from "../../../store/features/transaction";
 import { formatStatusToTag } from "../../../helpers";
-import { ITransaction } from "../../../types";
+import { IPurchasedProduct, ITransaction } from "../../../types";
 import { message } from "antd";
 import { UPLOAD_URL } from "../../../constant";
 
@@ -25,7 +25,11 @@ const ManageTransactionPage = () => {
                 />
             ),
             paymentAmount: `$${item?.subTotal}`,
-            totalProduct: item?.purchasedProducts?.length,
+            totalProduct: item?.purchasedProducts?.reduce(
+                (prev: number, curr: IPurchasedProduct) =>
+                    prev + Number(curr.quantity),
+                0
+            ),
             status: formatStatusToTag(item?.status),
         }));
     };

@@ -3,13 +3,13 @@ export const columns = [
         dataIndex: "name",
         title: "NAME",
     },
+    // {
+    //     dataIndex: "spendTime",
+    //     title: "SPEND TIME",
+    // },
     {
-        dataIndex: "spendTime",
-        title: "SPEND TIME",
-    },
-    {
-        dataIndex: "isExprired",
-        title: "IS EXPIRED",
+        dataIndex: "discount",
+        title: "DISCOUNT",
     },
     {
         dataIndex: "createDate",
