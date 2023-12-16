@@ -12,6 +12,10 @@ import { addFiles } from "../../../store/features/file";
 import CustomForm from "../../../custom/data-entry/form";
 import { CategoryApis } from "../../../apis/category";
 import { setAllCategory } from "../../../store/features/category";
+import { ColorApis } from "../../../apis/color";
+import { setAllColor } from "../../../store/features/color";
+import { SizeApis } from "../../../apis/size";
+import { setAllSize } from "../../../store/features/size";
 
 const AddProductPage = () => {
     const { id } = useParams();
@@ -29,13 +33,29 @@ const AddProductPage = () => {
             .catch(() => {
                 dispatch(setAllCategory([]));
             });
+        ColorApis.getAll()
+            .then((response) => {
+                dispatch(setAllColor(response?.data));
+            })
+            .catch(() => {
+                dispatch(setAllColor([]));
+            });
+        SizeApis.getAll()
+            .then((response) => {
+                dispatch(setAllSize(response?.data));
+            })
+            .catch(() => {
+                dispatch(setAllSize([]));
+            });
     }, []);
 
     useEffect(() => {
         if (id) {
             ProductApis.getProductById(id).then((response) => {
                 dispatch(addFiles(response?.data?.images));
-                form.setFieldsValue(response?.data);
+                form.setFieldsValue({
+                    ...response?.data,
+                });
             });
         }
     }, [id]);

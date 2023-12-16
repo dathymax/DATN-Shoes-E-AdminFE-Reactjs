@@ -1,7 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import AdminLayout from "./layout";
 import AuthPage from "./pages/auth";
-import DashboardPage from "./pages/dashboard";
 import SettingPage from "./pages/setting";
 import ProductListPage from "./pages/product/list";
 import ProductCategoriesPage from "./pages/product/categories";
@@ -14,7 +13,8 @@ import CustomerViewDetailPage from "./pages/customers/view";
 import TransactionViewPage from "./pages/transaction/transaction-view";
 import ReturnsViewPage from "./pages/transaction/returns-view";
 import PromoCodePage from "./pages/promo-code";
-import PromoCodeViewPage from "./pages/promo-code/services/view";
+import ColorList from "./pages/product/color";
+import SizeList from "./pages/product/size";
 
 function App() {
     return (
@@ -32,6 +32,8 @@ function App() {
                     path="/products/categories"
                     element={<ProductCategoriesPage />}
                 />
+                <Route path="/products/colors" element={<ColorList />} />
+                <Route path="/products/sizes" element={<SizeList />} />
                 <Route
                     path="/products/add-product"
                     element={<AddProductPage />}
@@ -70,7 +72,6 @@ function App() {
                     element={<CustomerViewDetailPage />}
                 />
                 <Route path="/promo-code" element={<PromoCodePage />} />
-                <Route path="/promo-code/:id" element={<PromoCodeViewPage />} />
             </Route>
             <Route path="/auth" element={<AuthPage />} />
             <Route path="/*" element={<AdminLayout />} />

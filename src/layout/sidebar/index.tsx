@@ -31,6 +31,20 @@ const AdminSidebar = () => {
                         paddingLeft: "36px",
                     },
                 },
+                {
+                    label: "Colors",
+                    key: "/products/colors",
+                    style: {
+                        paddingLeft: "36px",
+                    },
+                },
+                {
+                    label: "Sizes",
+                    key: "/products/sizes",
+                    style: {
+                        paddingLeft: "36px",
+                    },
+                },
             ],
         },
         {

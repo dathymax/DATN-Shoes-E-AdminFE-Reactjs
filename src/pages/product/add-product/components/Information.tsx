@@ -10,6 +10,8 @@ import { useAppSelector } from "../../../../store/store";
 
 const ProductAddInformation = () => {
     const categories = useAppSelector((state) => state.category.categories);
+    const colors = useAppSelector((state) => state.color.colors);
+    const sizes = useAppSelector((state) => state.size.sizes);
 
     return (
         <div className="bg-white px-4 py-5 rounded-lg mb-5">
@@ -30,6 +32,20 @@ const ProductAddInformation = () => {
                 ]}
             >
                 <CustomInput placeholder="Enter product name" />
+            </FormWrapper>
+
+            <FormWrapper
+                name="quantity"
+                labelTitle={"Quantity"}
+                isRequired
+                rules={[
+                    {
+                        required: true,
+                        message: "Please type quantity",
+                    },
+                ]}
+            >
+                <CustomInputNumber placeholder="00" />
             </FormWrapper>
 
             <FormWrapper
@@ -58,8 +74,58 @@ const ProductAddInformation = () => {
                 />
             </FormWrapper>
 
-            <FormWrapper name="size" labelTitle={"Size"}>
-                <CustomInputNumber placeholder="00" />
+            <FormWrapper
+                name="colors"
+                labelTitle={"Colors"}
+                isRequired
+                labelDescription={
+                    "Please select your product color from the list provided"
+                }
+                rules={[
+                    {
+                        required: true,
+                        message: "Please select color",
+                    },
+                ]}
+            >
+                <CustomSelect
+                    placeholder="Select color"
+                    options={colors.map((color) => ({
+                        label: (
+                            <div className="flex items-center justify-between gap-2">
+                                <p className="capitalize">{color.name}</p>
+                                <div
+                                    className="w-[20px] h-[20px] rounded-md"
+                                    style={{ background: color.name }}
+                                />
+                            </div>
+                        ),
+                        value: color.name,
+                    }))}
+                />
+            </FormWrapper>
+
+            <FormWrapper
+                name="sizes"
+                labelTitle={"Sizes"}
+                labelDescription={
+                    "Please select your product size from the list provided"
+                }
+                isRequired
+                rules={[
+                    {
+                        required: true,
+                        message: "Please select size",
+                    },
+                ]}
+            >
+                <CustomSelect
+                    placeholder="Select size"
+                    options={sizes.map((size) => ({
+                        label: size.size,
+                        value: size.size,
+                    }))}
+                />
             </FormWrapper>
 
             <FormWrapper

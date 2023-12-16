@@ -12,8 +12,8 @@ export const columns = [
         title: "STATUS",
     },
     {
-        dataIndex: "stock",
-        title: "STOCK",
+        dataIndex: "quantity",
+        title: "QUANTITY",
     },
     {
         dataIndex: "price",

@@ -60,27 +60,29 @@ const ProductListPage = () => {
     const getData = () => {
         getAllProducts()
             .then((response) => {
-                dispatch(setAllProduct(response?.data));
+                dispatch(setAllProduct(response?.data?.reverse()));
             })
             .catch(() => {
                 dispatch(setAllProduct([]));
             });
-    }
+    };
 
     useEffect(() => {
-        getData()
+        getData();
     }, []);
 
     const handleDelete = (id?: string) => {
-        deleteProduct(id).then(() => {
-            message.success("Delete product success!");
-            getData();
-        }).catch((error) => {
-            const { response } = error;
+        deleteProduct(id)
+            .then(() => {
+                message.success("Delete product success!");
+                getData();
+            })
+            .catch((error) => {
+                const { response } = error;
 
-            message.error(response?.data?.message);
-        })
-    }
+                message.error(response?.data?.message);
+            });
+    };
 
     return (
         <CustomTable

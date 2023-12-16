@@ -18,7 +18,7 @@ export interface IUser {
     avatar?: string;
     updatedAt?: Date | string;
     promoCodes?: IPromoCode[];
-    extCode?: string
+    extCode?: string;
 }
 
 export interface IProduct {
@@ -33,14 +33,15 @@ export interface IProduct {
     name?: string | React.ReactNode;
     rate?: number;
     shoeType?: string;
-    color?: string;
-    size?: number;
+    colors?: string[];
+    sizes?: number[];
     description?: string;
     category?: string;
     status?: string | boolean | React.ReactNode;
     discountType?: string;
     setDiscount?: string;
-    extCode?: string
+    extCode?: string;
+    quantity?: string | number;
 }
 
 export interface IPasswordReset {
@@ -65,7 +66,7 @@ export interface ICategory {
     description?: string;
     status?: string;
     thumbnail?: string;
-    extCode?: string
+    extCode?: string;
 }
 
 export interface IPurchasedProduct {
@@ -102,7 +103,7 @@ export interface ITransaction {
     extCode?: string;
 }
 
-export interface IReturns { }
+export interface IReturns {}
 
 export interface IPromoCode {
     id?: string;
@@ -112,4 +113,17 @@ export interface IPromoCode {
     isExpired?: boolean;
     createDate?: Date;
     modifiedDate?: Date;
+}
+
+export interface IColor {
+    name?: string;
+    id?: string;
+    _id?: string;
+    preview?: React.ReactNode;
+}
+
+export interface ISize {
+    size?: string;
+    id?: string;
+    _id?: string;
 }

@@ -65,9 +65,9 @@ const AdminHeader = () => {
                             <p className="mb-2 leading-[13px] font-bold">
                                 {userInfo?.firstname} {userInfo?.lastname}
                             </p>
-                            <p className="text-gray-400 leading-[13px]">
+                            {/* <p className="text-gray-400 leading-[13px]">
                                 {userInfo?.role}
-                            </p>
+                            </p> */}
                         </div>
                         <BsChevronDown className="text-gray-500 text-[20px]" />
                     </div>
