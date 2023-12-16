@@ -4,6 +4,7 @@ import { BsBoxSeam } from "react-icons/bs";
 import { MdOutlineDiscount } from "react-icons/md";
 import { PiReceiptLight, PiUsers } from "react-icons/pi";
 import { useLocation, useNavigate } from "react-router-dom";
+import { MdOutlineSpaceDashboard } from "react-icons/md";
 
 const { Sider } = Layout;
 
@@ -12,6 +13,14 @@ const AdminSidebar = () => {
     const { pathname } = useLocation();
 
     const menuItems = [
+        {
+            label: "Dashboard",
+            key: "/dashboard",
+            icon: <MdOutlineSpaceDashboard style={{ fontSize: 18 }} />,
+            style: {
+                paddingLeft: "12px",
+            },
+        },
         {
             label: "Products",
             key: "/products",

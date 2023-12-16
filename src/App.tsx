@@ -15,13 +15,14 @@ import ReturnsViewPage from "./pages/transaction/returns-view";
 import PromoCodePage from "./pages/promo-code";
 import ColorList from "./pages/product/color";
 import SizeList from "./pages/product/size";
+import DashboardPage from "./pages/dashboard";
 
 function App() {
     return (
         <Routes>
             <Route element={<AdminLayout />}>
-                <Route path="/" element={<ProductListPage />} />
-                {/* <Route path="/dashboard" element={<DashboardPage />} /> */}
+                <Route path="/" element={<DashboardPage />} />
+                <Route path="/dashboard" element={<DashboardPage />} />
                 <Route path="/setting" element={<SettingPage />} />
                 <Route path="/setting/:id" element={<SettingPage />} />
                 <Route
