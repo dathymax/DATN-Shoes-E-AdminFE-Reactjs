@@ -49,8 +49,8 @@ export const formatStatusToTag = (status?: string) => {
             return <Tag color="gold">Process</Tag>;
         case "delivering":
             return <Tag color="blue">Delivering</Tag>;
-        case "failed":
-            return <Tag color="red">Failed</Tag>;
+        case "return":
+            return <Tag color="red">Refund</Tag>;
         case "packed":
             return <Tag color="green">Packed</Tag>;
         default:

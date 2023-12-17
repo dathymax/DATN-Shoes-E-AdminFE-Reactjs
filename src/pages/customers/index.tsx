@@ -17,7 +17,7 @@ const CustomersPage = () => {
             return {
                 ...item,
                 name: `${item.firstname} ${item.lastname}`,
-                completeAddress: `${item.address}. ${item.district}, ${item.province}, ${item.city}, ${item.country}`,
+                address: item.address ? item.address : "",
             };
         });
     };
@@ -31,21 +31,23 @@ const CustomersPage = () => {
                 const { response } = error;
                 openNotiError("Get users", response?.data?.message);
             });
-    }
+    };
 
     useEffect(() => {
         getData();
     }, []);
 
     const handleDelete = (id?: string) => {
-        UserApis.deleteUser(id).then(() => {
-            message.success("Delete user success!");
-        }).catch((error) => {
-            const { response } = error;
+        UserApis.deleteUser(id)
+            .then(() => {
+                message.success("Delete user success!");
+            })
+            .catch((error) => {
+                const { response } = error;
 
-            message.error(response?.data?.message);
-        })
-    }
+                message.error(response?.data?.message);
+            });
+    };
 
     return (
         <CustomTable
