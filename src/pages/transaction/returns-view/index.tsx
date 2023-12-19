@@ -1,23 +1,32 @@
-import { useEffect } from 'react'
-import CustomForm from '../../../custom/data-entry/form'
-import { useParams } from 'react-router-dom';
-import { Form } from 'antd';
-import ReturnsDetail from './components/ReturnsDetail';
-import ProductDetail from './components/ProductDetail';
-import Shipping from '../components/Shipping';
-import PurchasedDetail from './components/PurchasedDetail';
-import { TransactionApis } from '../../../apis/transaction';
+import { useEffect, useState } from "react";
+import CustomForm from "../../../custom/data-entry/form";
+import { useParams } from "react-router-dom";
+import { Form } from "antd";
+import ReturnsDetail from "./components/ReturnsDetail";
+import ProductDetail from "./components/ProductDetail";
+import Shipping from "../components/Shipping";
+import PurchasedDetail from "./components/PurchasedDetail";
+import { TransactionApis } from "../../../apis/transaction";
+import dayjs from "dayjs";
+import { ITransaction } from "../../../types";
 
 const ReturnsViewPage = () => {
     const { id } = useParams();
     const [form] = Form.useForm();
     const { getById } = TransactionApis;
+    const [data, setData] = useState<ITransaction>();
 
     useEffect(() => {
-        getById(id).then(response => {
-            form.setFieldsValue(response?.data)
-        }).catch(() => { })
-    }, [id])
+        getById(id)
+            .then((response) => {
+                form.setFieldsValue({
+                    ...response?.data,
+                    date: dayjs(response?.data?.date),
+                });
+                setData(response?.data);
+            })
+            .catch(() => {});
+    }, [id]);
 
     return (
         <CustomForm form={form} disabled>
@@ -29,11 +38,11 @@ const ReturnsViewPage = () => {
 
             <ReturnsDetail />
 
-            <ProductDetail />
+            <ProductDetail products={data?.purchasedProducts} />
 
             <Shipping />
         </CustomForm>
-    )
-}
+    );
+};
 
-export default ReturnsViewPage
+export default ReturnsViewPage;

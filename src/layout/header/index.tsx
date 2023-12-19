@@ -46,7 +46,8 @@ const AdminHeader = () => {
             }}
             className="flex items-center justify-between px-[30px] py-[15px] overflow-hidden"
         >
-            <InputSearch />
+            {/* <InputSearch /> */}
+            <div></div>
 
             <div className="user-action flex items-center gap-5">
                 <Dropdown

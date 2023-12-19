@@ -28,7 +28,7 @@ const ManageReturnsPage = () => {
             paymentAmount: `$${item?.subTotal}`,
             totalProduct: item?.purchasedProducts?.reduce(
                 (prev: number, curr: IPurchasedProduct) =>
-                    prev + Number(curr.quantity),
+                    prev + Number(curr?.quantity),
                 0
             ),
             status: formatStatusToTag(item?.status),

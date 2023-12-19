@@ -5,6 +5,7 @@ import { IUser } from "../../../../types";
 import { Button, Form, Select } from "antd";
 import { PromoCodeApis } from "../../../../apis/promo-code";
 import { OptionProps } from "antd/es/select";
+import { useAppContext } from "../../../../contexts/AppContext";
 
 interface PromoCodesProps {
     user?: IUser;
@@ -15,6 +16,7 @@ const PromoCodes: FC<PromoCodesProps> = ({ user }) => {
     const { getAll } = PromoCodeApis;
     const { updateUser } = UserApis;
     const [promoCodes, setPromoCodes] = useState<OptionProps[]>([]);
+    const { setLoading, openNotiSuccess, openNotiError } = useAppContext();
 
     useEffect(() => {
         getAll()
@@ -26,7 +28,7 @@ const PromoCodes: FC<PromoCodesProps> = ({ user }) => {
                     }))
                 );
             })
-            .catch(() => { });
+            .catch(() => {});
     }, []);
 
     useEffect(() => {
@@ -36,9 +38,15 @@ const PromoCodes: FC<PromoCodesProps> = ({ user }) => {
     }, [user]);
 
     const onFinish = (values?: IUser) => {
+        setLoading(true);
         updateUser(user?._id, values)
-            .then(() => { })
-            .catch(() => { });
+            .then(() => {
+                openNotiSuccess("Set promo codes for user");
+            })
+            .catch(() => {
+                openNotiError("Set promo codes for user");
+            })
+            .finally(() => setLoading(false));
     };
 
     return (
