@@ -12,8 +12,8 @@ export const columns = [
         title: "PHONE NUMBER",
     },
     {
-        dataIndex: "completeAddress",
-        title: "COMPLETE ADDRESS",
+        dataIndex: "address",
+        title: "ADDRESS",
         with: 150,
     },
 ];

@@ -108,6 +108,7 @@ export interface IReturns {}
 export interface IPromoCode {
     id?: string;
     _id?: string;
+    discount?: number;
     name: string;
     spendTime?: number;
     isExpired?: boolean;

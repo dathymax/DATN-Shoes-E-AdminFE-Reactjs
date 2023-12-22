@@ -26,6 +26,7 @@ const PromoCodePage = () => {
             return {
                 ...item,
                 key: item?.id,
+                discount: `${item?.discount}%`,
                 createDate: dayjs(item?.createDate).format("DD/MM/YYYY"),
                 modifiedDate: dayjs(item?.modifiedDate).format("DD/MM/YYYY"),
             };
@@ -37,7 +38,7 @@ const PromoCodePage = () => {
             .then((response) => {
                 dispatch(setAllPromoCode(response?.data));
             })
-            .catch(() => { });
+            .catch(() => {});
     };
 
     useEffect(() => {
@@ -45,15 +46,17 @@ const PromoCodePage = () => {
     }, []);
 
     const handleDelete = (id?: string) => {
-        deleteById(id).then(() => {
-            message.success("Delete promo code success!");
-            getData();
-        }).catch((error) => {
-            const { response } = error;
+        deleteById(id)
+            .then(() => {
+                message.success("Delete promo code success!");
+                getData();
+            })
+            .catch((error) => {
+                const { response } = error;
 
-            message.error(response?.data?.message);
-        })
-    }
+                message.error(response?.data?.message);
+            });
+    };
 
     return (
         <>

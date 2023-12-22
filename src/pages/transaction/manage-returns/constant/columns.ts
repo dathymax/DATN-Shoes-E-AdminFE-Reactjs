@@ -12,10 +12,6 @@ export const columns = [
         title: "PURCHASED PRODUCT",
     },
     {
-        dataIndex: "date",
-        title: "DATE",
-    },
-    {
         dataIndex: "phoneNumber",
         title: "PHONE NUMBER",
     },

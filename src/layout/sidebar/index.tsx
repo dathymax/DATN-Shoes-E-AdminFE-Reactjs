@@ -16,9 +16,9 @@ const AdminSidebar = () => {
         {
             label: "Dashboard",
             key: "/dashboard",
-            icon: <MdOutlineSpaceDashboard style={{ fontSize: 18 }} />,
+            icon: <MdOutlineSpaceDashboard style={{ fontSize: 20 }} />,
             style: {
-                paddingLeft: "12px",
+                paddingLeft: "10px",
             },
         },
         {
@@ -80,17 +80,17 @@ const AdminSidebar = () => {
         {
             label: "Promo codes",
             key: "/promo-code",
-            icon: <MdOutlineDiscount style={{ fontSize: 18 }} />,
+            icon: <MdOutlineDiscount style={{ fontSize: 20 }} />,
             style: {
-                paddingLeft: "12px",
+                paddingLeft: "10px",
             },
         },
         {
             label: "Customers",
             key: "/customers",
-            icon: <PiUsers style={{ fontSize: 18 }} />,
+            icon: <PiUsers style={{ fontSize: 20 }} />,
             style: {
-                paddingLeft: "12px",
+                paddingLeft: "10px",
             },
         },
     ];
