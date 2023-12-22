@@ -1,4 +1,4 @@
-import { Layout, Menu } from "antd";
+import { Layout, Menu, MenuProps } from "antd";
 import Logo from "../../assets/images/Logo.png";
 import { BsBoxSeam } from "react-icons/bs";
 import { MdOutlineDiscount } from "react-icons/md";
@@ -12,7 +12,7 @@ const AdminSidebar = () => {
     const navigate = useNavigate();
     const { pathname } = useLocation();
 
-    const menuItems = [
+    const menuItems: MenuProps["items"] = [
         {
             label: "Dashboard",
             key: "/dashboard",
@@ -95,7 +95,7 @@ const AdminSidebar = () => {
         },
     ];
 
-    const onClick = ({ key }: { key: string }) => {
+    const onClick: MenuProps["onClick"] = ({ key }: { key: string }) => {
         navigate(key);
     };
 
