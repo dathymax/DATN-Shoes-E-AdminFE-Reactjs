@@ -22,22 +22,27 @@ const Sales: FC<SalesProps> = ({ totalSales }) => {
         ?.reduce((prev: number, curr: ITransaction) => {
             return prev + Number(curr.subTotal);
         }, 0);
-    const totalDays: ITransaction[] = Array.from(
-        totalSales?.reduce(
-            (accumulator: Map<string, number>, currentValue: ITransaction) => {
-                const existingTotal =
-                    accumulator.get(
-                        dayjs(currentValue?.date).format("DD/MM/YYYY")
-                    ) || 0;
-                accumulator.set(
-                    dayjs(currentValue?.date).format("DD/MM/YYYY"),
-                    Number(existingTotal) + Number(currentValue.subTotal)
-                );
-                return accumulator;
-            },
-            new Map<string, number>()
-        )
-    ).map(([date, subTotal]) => ({ date, subTotal }));
+    const totalDays: ITransaction[] =
+        totalSales &&
+        Array?.from(
+            totalSales?.reduce(
+                (
+                    accumulator: Map<string, number>,
+                    currentValue: ITransaction
+                ) => {
+                    const existingTotal =
+                        accumulator.get(
+                            dayjs(currentValue?.date).format("DD/MM/YYYY")
+                        ) || 0;
+                    accumulator.set(
+                        dayjs(currentValue?.date).format("DD/MM/YYYY"),
+                        Number(existingTotal) + Number(currentValue.subTotal)
+                    );
+                    return accumulator;
+                },
+                new Map<string, number>()
+            )
+        ).map(([date, subTotal]) => ({ date, subTotal }));
 
     const dataDays = useMemo(() => {
         return {
