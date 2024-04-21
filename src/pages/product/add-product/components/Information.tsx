@@ -119,13 +119,14 @@ const ProductAddInformation = () => {
                     },
                 ]}
             >
-                <CustomSelect
+                {/* <CustomSelect
                     placeholder="Select size"
                     options={sizes.map((size) => ({
                         label: size.size,
                         value: size.size,
                     }))}
-                />
+                /> */}
+                <CustomInputNumber min={1} placeholder="Type size" />
             </FormWrapper>
 
             <FormWrapper

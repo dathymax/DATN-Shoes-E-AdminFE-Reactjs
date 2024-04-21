@@ -5,8 +5,10 @@ import { TransactionApis } from "../../apis/transaction";
 import { UserApis } from "../../apis/user";
 import { ProductApis } from "../../apis/product";
 import { IProduct, IPurchasedProduct, ITransaction } from "../../types";
+import { useAppContext } from "../../contexts/AppContext";
 
 const DashboardPage = () => {
+    const { setLoading } = useAppContext();
     const [products, setProducts] = useState(
         {} as { products: IProduct[]; total: number }
     );
@@ -15,55 +17,59 @@ const DashboardPage = () => {
     );
     const [totalUsers, setTotalUsers] = useState(0);
 
+    const getData = async () => {
+        setLoading(true);
+
+        const promise1 = await TransactionApis.getAllInstance();
+        const promise2 = await UserApis.getAllUsers();
+        const promise3 = await ProductApis.getAllProducts();
+
+        Promise.all([promise1, promise2, promise3]).then(response => {
+            const response1 = response[0];
+            const response2 = response[1];
+            const response3 = response[2];
+
+            setTotalSales({
+                data: response1?.data,
+                total: response1?.data?.reduce(
+                    (prev: number, item: ITransaction) =>
+                        Number(prev) +
+                        Number(
+                            item?.purchasedProducts?.reduce(
+                                (
+                                    prevProduct: number,
+                                    currProduct: IPurchasedProduct
+                                ) =>
+                                    Number(prevProduct) +
+                                    Number(currProduct.quantity),
+                                0
+                            )
+                        ),
+                    0
+                ),
+            });
+
+            setTotalUsers(response2?.data?.length);
+
+            setProducts({
+                products: response3?.data,
+                total: response3?.data?.reduce(
+                    (prev: number, item: IProduct) =>
+                        Number(prev) + Number(item.quantity),
+                    0
+                ),
+            });
+        }).catch(() => {
+            setTotalSales({ data: [], total: 0 });
+            setTotalUsers(0);
+            setProducts({ products: [], total: 0 });
+        }).finally(() => {
+            setLoading(false);
+        });
+    }
+
     useEffect(() => {
-        TransactionApis.getAllInstance()
-            .then((response) => {
-                setTotalSales({
-                    data: response?.data,
-                    total: response?.data?.reduce(
-                        (prev: number, item: ITransaction) =>
-                            Number(prev) +
-                            Number(
-                                item?.purchasedProducts?.reduce(
-                                    (
-                                        prevProduct: number,
-                                        currProduct: IPurchasedProduct
-                                    ) =>
-                                        Number(prevProduct) +
-                                        Number(currProduct.quantity),
-                                    0
-                                )
-                            ),
-                        0
-                    ),
-                });
-            })
-            .catch(() => {
-                setTotalSales({ data: [], total: 0 });
-            });
-
-        UserApis.getAllUsers()
-            .then((response) => {
-                setTotalUsers(response?.data?.length);
-            })
-            .catch(() => {
-                setTotalUsers(0);
-            });
-
-        ProductApis.getAllProducts()
-            .then((response) => {
-                setProducts({
-                    products: response?.data,
-                    total: response?.data?.reduce(
-                        (prev: number, item: IProduct) =>
-                            Number(prev) + Number(item.quantity),
-                        0
-                    ),
-                });
-            })
-            .catch(() => {
-                setProducts({ products: [], total: 0 });
-            });
+        getData();
     }, []);
 
     return (

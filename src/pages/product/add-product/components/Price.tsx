@@ -20,7 +20,7 @@ const ProductAddPrice = () => {
                     },
                 ]}
             >
-                <CustomInputNumber placeholder="00" />
+                <CustomInputNumber placeholder="00" prefix={"$"} />
             </FormWrapper>
         </div>
     );
