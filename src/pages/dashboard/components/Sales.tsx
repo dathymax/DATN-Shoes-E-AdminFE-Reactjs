@@ -17,15 +17,27 @@ interface IDataTotal {
 const Sales: FC<SalesProps> = ({ totalSales }) => {
     const [dataDay, setDataDay] = useState<IDataTotal>({
         time: dayjs(),
-        total: 0
+        total: totalSales
+            ?.filter((item) => dayjs(item.date).format("YYYY-MM-DD") === dayjs().format("YYYY-MM-DD"))
+            ?.reduce((prev: number, curr: ITransaction) => {
+                return prev + Number(curr.subTotal);
+            }, 0)
     });
     const [dataMonth, setDataMonth] = useState<IDataTotal>({
         time: dayjs(),
-        total: 0
+        total: totalSales
+            ?.filter((item) => dayjs(item.date).month() === new Date().getMonth())
+            ?.reduce((prev: number, curr: ITransaction) => {
+                return prev + Number(curr.subTotal);
+            }, 0)
     });
     const [dataYear, setDataYear] = useState<IDataTotal>({
         time: dayjs(),
-        total: 0
+        total: totalSales
+            ?.filter((item) => dayjs(item.date).year() === new Date().getFullYear())
+            ?.reduce((prev: number, curr: ITransaction) => {
+                return prev + Number(curr.subTotal);
+            }, 0)
     });
 
     const handleChangeDay = (value: Dayjs | null) => {
@@ -77,7 +89,7 @@ const Sales: FC<SalesProps> = ({ totalSales }) => {
         },
         series: [
             {
-                data: [dataDay.total || totalSales
+                data: [dataDay.total ?? totalSales
                     ?.filter((item) => dayjs(item.date).format("YYYY-MM-DD") === dayjs().format("YYYY-MM-DD"))
                     ?.reduce((prev: number, curr: ITransaction) => {
                         return prev + Number(curr.subTotal);
@@ -101,7 +113,7 @@ const Sales: FC<SalesProps> = ({ totalSales }) => {
         },
         series: [
             {
-                data: [dataMonth.total || totalSales
+                data: [dataMonth.total ?? totalSales
                     ?.filter((item) => dayjs(item.date).month() === new Date().getMonth())
                     ?.reduce((prev: number, curr: ITransaction) => {
                         return prev + Number(curr.subTotal);
@@ -125,7 +137,7 @@ const Sales: FC<SalesProps> = ({ totalSales }) => {
         },
         series: [
             {
-                data: [dataYear.total || totalSales
+                data: [dataYear.total ?? totalSales
                     ?.filter((item) => dayjs(item.date).year() === new Date().getFullYear())
                     ?.reduce((prev: number, curr: ITransaction) => {
                         return prev + Number(curr.subTotal);
