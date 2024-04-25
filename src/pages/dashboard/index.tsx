@@ -16,6 +16,7 @@ const DashboardPage = () => {
         {} as { data: ITransaction[]; total: number }
     );
     const [totalUsers, setTotalUsers] = useState(0);
+    const [profit, setProfit] = useState(0);
 
     const getData = async () => {
         setLoading(true);
@@ -28,6 +29,21 @@ const DashboardPage = () => {
             const response1 = response[0];
             const response2 = response[1];
             const response3 = response[2];
+            const totalSalesData = response1?.data?.reduce(
+                (prev: number, curr: ITransaction) =>
+                    Number(prev) + Number(curr.subTotal),
+                0
+            );
+            const totalOriginalPrice = response3?.data?.reduce(
+                (prev: number, item: IProduct) => {
+                    if (item.originalPrice) {
+                        return Number(prev) + Number(item.originalPrice)
+                    } else {
+                        return 0;
+                    }
+                },
+                0
+            );
 
             setTotalSales({
                 data: response1?.data,
@@ -59,6 +75,8 @@ const DashboardPage = () => {
                     0
                 ),
             });
+
+            setProfit(totalSalesData - totalOriginalPrice);
         }).catch(() => {
             setTotalSales({ data: [], total: 0 });
             setTotalUsers(0);
@@ -79,6 +97,7 @@ const DashboardPage = () => {
                 totalUsers={totalUsers}
                 totalProductSale={totalSales.data}
                 totalSales={totalSales.total}
+                profit={profit}
             />
             <Sales totalSales={totalSales?.data} />
         </div>

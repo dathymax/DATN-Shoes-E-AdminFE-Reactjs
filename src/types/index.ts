@@ -42,6 +42,7 @@ export interface IProduct {
     setDiscount?: string;
     extCode?: string;
     quantity?: string | number;
+    originalPrice?: number;
 }
 
 export interface IPasswordReset {
@@ -103,7 +104,7 @@ export interface ITransaction {
     extCode?: string;
 }
 
-export interface IReturns {}
+export interface IReturns { }
 
 export interface IPromoCode {
     id?: string;

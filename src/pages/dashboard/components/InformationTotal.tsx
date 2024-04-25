@@ -7,6 +7,7 @@ interface InformationTotalProps {
     totalSales: number;
     totalUsers: number;
     stock: number;
+    profit: number;
 }
 
 const InformationTotal: FC<InformationTotalProps> = ({
@@ -14,9 +15,10 @@ const InformationTotal: FC<InformationTotalProps> = ({
     totalUsers,
     stock,
     totalProductSale,
+    profit
 }) => {
     return (
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid grid-cols-5 gap-4">
             <div className="col-span-1">
                 <Card>
                     <p className="uppercase text-gray-500 mb-3">TOTAL SALES</p>
@@ -27,6 +29,15 @@ const InformationTotal: FC<InformationTotalProps> = ({
                                 Number(prev) + Number(curr.subTotal),
                             0
                         )}
+                    </h2>
+                </Card>
+            </div>
+            <div className="col-span-1">
+                <Card>
+                    <p className="uppercase text-gray-500 mb-3">PROFIT</p>
+                    <h2 className="text-3xl">
+                        ${" "}
+                        {profit}
                     </h2>
                 </Card>
             </div>

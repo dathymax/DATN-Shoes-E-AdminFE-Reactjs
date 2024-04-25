@@ -22,6 +22,20 @@ const ProductAddPrice = () => {
             >
                 <CustomInputNumber placeholder="00" prefix={"$"} />
             </FormWrapper>
+
+            <FormWrapper
+                name="originalPrice"
+                labelTitle={"Original price"}
+                isRequired
+                rules={[
+                    {
+                        required: true,
+                        message: "Please type original price",
+                    },
+                ]}
+            >
+                <CustomInputNumber placeholder="00" prefix={"$"} />
+            </FormWrapper>
         </div>
     );
 };
