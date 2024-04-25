@@ -81,6 +81,7 @@ export interface IPurchasedProduct {
     price?: number | string;
     total?: number | string;
     transactionExt?: string;
+    originalPrice?: number;
 }
 
 export interface ITransaction {

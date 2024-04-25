@@ -34,14 +34,20 @@ const DashboardPage = () => {
                     Number(prev) + Number(curr.subTotal),
                 0
             );
-            const totalOriginalPrice = response3?.data?.reduce(
-                (prev: number, item: IProduct) => {
-                    if (item.originalPrice) {
-                        return Number(prev) + Number(item.originalPrice)
-                    } else {
-                        return 0;
-                    }
-                },
+            const totalOriginalPrice = response1?.data?.reduce(
+                (prev: number, item: ITransaction) =>
+                    Number(prev) +
+                    Number(
+                        item?.purchasedProducts?.reduce(
+                            (
+                                prevProduct: number,
+                                currProduct: IPurchasedProduct
+                            ) =>
+                                Number(prevProduct) +
+                                Number(currProduct.originalPrice || 0) * Number(currProduct.quantity || 0),
+                            0
+                        )
+                    ),
                 0
             );
 

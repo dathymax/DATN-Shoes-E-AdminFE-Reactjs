@@ -18,11 +18,11 @@ const InformationTotal: FC<InformationTotalProps> = ({
     profit
 }) => {
     return (
-        <div className="grid grid-cols-5 gap-4">
+        <div className="grid grid-cols-4 gap-4">
             <div className="col-span-1">
                 <Card>
-                    <p className="uppercase text-gray-500 mb-3">TOTAL SALES</p>
-                    <h2 className="text-3xl">
+                    <p className="uppercase text-gray-500 mb-3 font-medium">TOTAL SALES</p>
+                    <h2 className="text-3xl line-clamp-1 mb-2">
                         ${" "}
                         {totalProductSale?.reduce(
                             (prev: number, curr: ITransaction) =>
@@ -30,12 +30,13 @@ const InformationTotal: FC<InformationTotalProps> = ({
                             0
                         )}
                     </h2>
+                    / <span className="text-xl">{totalSales} products</span>
                 </Card>
             </div>
             <div className="col-span-1">
                 <Card>
-                    <p className="uppercase text-gray-500 mb-3">PROFIT</p>
-                    <h2 className="text-3xl">
+                    <p className="uppercase text-gray-500 mb-3 font-medium">PROFIT</p>
+                    <h2 className="text-3xl line-clamp-1">
                         ${" "}
                         {profit}
                     </h2>
@@ -43,21 +44,13 @@ const InformationTotal: FC<InformationTotalProps> = ({
             </div>
             <div className="col-span-1">
                 <Card>
-                    <p className="uppercase text-gray-500 mb-3">
-                        TOTAL PRODUCTS SALES
-                    </p>
-                    <h2 className="text-3xl">{totalSales}</h2>
-                </Card>
-            </div>
-            <div className="col-span-1">
-                <Card>
-                    <p className="uppercase text-gray-500 mb-3">STOCK</p>
+                    <p className="uppercase text-gray-500 mb-3 font-medium">STOCK</p>
                     <h2 className="text-3xl">{stock}</h2>
                 </Card>
             </div>
             <div className="col-span-1">
                 <Card>
-                    <p className="uppercase text-gray-500 mb-3">TOTAL USERS</p>
+                    <p className="uppercase text-gray-500 mb-3 font-medium">TOTAL USERS</p>
                     <h2 className="text-3xl">{totalUsers}</h2>
                 </Card>
             </div>
