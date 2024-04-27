@@ -51,6 +51,8 @@ const DashboardPage = () => {
                 0
             );
 
+            console.log("jtadd", { totalOriginalPrice, totalSalesData })
+
             setTotalSales({
                 data: response1?.data,
                 total: response1?.data?.reduce(
