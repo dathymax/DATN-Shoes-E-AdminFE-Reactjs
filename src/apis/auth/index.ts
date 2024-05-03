@@ -5,7 +5,7 @@ import Cookies from "js-cookie";
 const url = "/auth";
 
 export async function login(values: IUser) {
-    const response = await Axios_instance.post(url, values);
+    const response = await Axios_instance.post(`${url}/admin`, values);
     return response?.data || {};
 }
 
